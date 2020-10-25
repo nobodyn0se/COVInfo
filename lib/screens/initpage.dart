@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:ncov_visual/screens/mainpage.dart';
-import 'package:ncov_visual/screens/countriespage.dart';
-import 'package:ncov_visual/screens/indiapage.dart';
-import 'package:ncov_visual/screen_size.dart';
+import '../screens/mainpage.dart';
+import '../screens/countriespage.dart';
+import '../screens/indiapage.dart';
+import '../util/screen_size.dart';
+import '../util/colorslist.dart';
 
 class InitPage extends StatefulWidget {
   InitPage({Key key}) : super(key: key);
@@ -18,19 +19,6 @@ class _InitPageState extends State<InitPage> {
   );
   //PageView and BottomNavigationBar are independent hence require both
   //initialPage and index properties separately defined
-
-  final List<Color> colorlst = [
-    Colors.orange[100],
-    Colors.lightBlue[200],
-    Colors.green[100]
-  ];
-
-  final List<Color> bgcolor = [
-    //Complements AppBar colors
-    Colors.orange[700],
-    Colors.lightBlue[900],
-    Colors.green[700]
-  ];
 
   List<Widget> _screen = [CountriesPage(), MainPage(), IndiaPage()];
 
