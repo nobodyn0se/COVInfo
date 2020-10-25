@@ -11,7 +11,9 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        backgroundColor: Colors.lightBlue[900],
         title: Text('Worldwide Statistics'),
       ),
       body: Center(

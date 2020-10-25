@@ -11,7 +11,9 @@ class IndiaPageState extends State<IndiaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        backgroundColor: Colors.green[700],
         title: Text('India (Detailed)'),
       ),
       body: Center(

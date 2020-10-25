@@ -11,7 +11,9 @@ class CountriesPageState extends State<CountriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        backgroundColor: Colors.orange[700],
         title: Text('List Of Countries'),
       ),
       body: Center(
