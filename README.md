@@ -25,6 +25,7 @@ Workflow: Changes in your feature branch (username_mod) will be rebased on top o
 
 ## Do not use git push --force under any circumstances ##
 ## Do not make changes to your main branch. Always ensure that you're working on your mod branch using git branch or git branch --show-current ## 
+## Do not push changes to your mod branch remote unless your previous PR is merged to avoid the commits from appearing in the open PR ##  
 
 ## TO DO ## 
 1. Create a Bottom Navigation Bar to show different pages using tabs. 
