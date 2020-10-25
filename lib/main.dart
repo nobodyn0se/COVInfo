@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ncov_visual/screens/initpage.dart'; 
+import './screens/initpage.dart'; 
 
 void main() {
   runApp(MyApp());
