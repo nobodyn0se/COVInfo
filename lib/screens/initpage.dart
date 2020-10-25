@@ -32,9 +32,15 @@ class _InitPageState extends State<InitPage> {
     Colors.green[700]
   ];
 
+  int initIndex = 1; //Center Page - Worldwide displayed initially
+
   List<Widget> _screen = [CountriesPage(), MainPage(), IndiaPage()];
 
-  int initIndex = 1; //Center Page - Worldwide displayed initially
+  void _onScreenChanged(int index) {
+    setState(() {
+      initIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,7 @@ class _InitPageState extends State<InitPage> {
       body: PageView(
         controller: _pageController,
         children: _screen,
+        onPageChanged: _onScreenChanged,
         physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -55,8 +62,8 @@ class _InitPageState extends State<InitPage> {
           setState(() {
             //changes both BNB index and PageIndex referenced from <List> _screen
             initIndex = index;
-            _pageController.jumpToPage(index);
           });
+          _pageController.jumpToPage(index);
         },
         items: [
           Icon(Icons.list,
