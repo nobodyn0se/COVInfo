@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screen_size.dart';
 
 class CountriesPage extends StatefulWidget {
   CountriesPage({Key key}) : super(key: key);
@@ -24,7 +25,10 @@ class CountriesPageState extends State<CountriesPage> {
             child: TextField(
               decoration: InputDecoration(
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(40.0)),
+                    borderRadius: BorderRadius.circular(
+                      ScreenSize.screenWidth*0.2,
+                    ),
+                  ),
                   labelText: 'Search any Country'),
             ),
           ),
@@ -32,27 +36,25 @@ class CountriesPageState extends State<CountriesPage> {
           Expanded(
             flex: 8,
             child: ListView.builder(
-                itemCount: 100,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: null,
-                    child: Card(
-                      child: Row(
-                        children: [
-                          Icon(Icons.ac_unit),
-                          Text('Country name'),
-                          Text('Index'),
-                        ],
-                      ),
+              itemCount: 100,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: null,
+                  child: Card(
+                    child: Row(
+                      children: [
+                        Icon(Icons.ac_unit),
+                        Text('Country name'),
+                        Text('Index'),
+                      ],
                     ),
-                  );
-                }),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
     );
   }
 }
-
-/*
-      */
