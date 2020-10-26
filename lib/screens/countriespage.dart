@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screen_size.dart';
 
 class CountriesPage extends StatefulWidget {
+  static const routeName = '/countries_page';
   CountriesPage({Key key}) : super(key: key);
 
   @override

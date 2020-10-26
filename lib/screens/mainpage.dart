@@ -4,6 +4,7 @@ import 'package:ncov_visual/widgets/pie_chart.dart';
 import '../screen_size.dart';
 
 class MainPage extends StatefulWidget {
+  static const routeName = '/main_page';
   MainPage({Key key}) : super(key: key);
 
   @override

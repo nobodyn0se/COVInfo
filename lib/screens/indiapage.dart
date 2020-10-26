@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IndiaPage extends StatefulWidget {
+  static const routeName = '/india_page';
   IndiaPage({Key key}) : super(key: key); 
 
   @override
