@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/providers/all_data_provider.dart';
 import 'package:ncov_visual/screens/initpage.dart';
 import 'package:provider/provider.dart';
 import './screens/mainpage.dart';
 import './screens/indiapage.dart';
 import './screens/countriespage.dart';
-import './providers/data_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,8 +13,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => data_provider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => All_data_provider(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:ncov_visual/providers/all_data_provider.dart';
 import 'package:ncov_visual/widgets/pie_chart.dart';
-import '../screen_size.dart';
+import 'package:provider/provider.dart';
+import '../models/all_data.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = '/main_page';
@@ -13,26 +15,9 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   List<charts.Series<Task, String>> _seriesPieData;
-
+  all_data data;
+  var pieData;
   _generateData() {
-    var pieData = [
-      Task(
-        task: 'Work',
-        taskvalue: 25.6,
-      ),
-      Task(
-        task: 'Study',
-        taskvalue: 15.6,
-      ),
-      Task(
-        task: 'Food',
-        taskvalue: 5.6,
-      ),
-      Task(
-        task: 'Sleep',
-        taskvalue: 9.6,
-      ),
-    ];
     _seriesPieData.add(
       // ignore: missing_required_param
       charts.Series(
@@ -58,7 +43,38 @@ class MainPageState extends State<MainPage> {
         title: Text('Worldwide Statistics'),
       ),
       body: Center(
-        child: DonutPieChart(_seriesPieData),
+        child: FutureBuilder(
+          future: Provider.of<All_data_provider>(context).fetchAllData(),
+          builder: (context, snapshot) {
+            data = snapshot.data;
+            pieData = [
+              Task(task: 'total cases', taskvalue: 100),
+              Task(task: 'total deaths', taskvalue: 120),
+              Task(task: 'total recovered', taskvalue: 600),
+            ];
+            return Center(
+              child: DonutPieChart(
+                _seriesPieData,animate: true,
+              ),
+            );
+            /*return Card(
+              child: Column(
+                children: [
+                  Text(
+                    data.cases.toString(),
+                  ),
+                  Text(
+                    data.deaths.toString(),
+                  ),
+                  Text(
+                    data.recovered.toString(),
+                  ),
+                ],
+              ),
+            )*/
+            ;
+          },
+        ),
       ),
     );
   }
@@ -66,7 +82,7 @@ class MainPageState extends State<MainPage> {
 
 class Task {
   String task;
-  double taskvalue;
+  int taskvalue;
 
   Task({
     this.task,
