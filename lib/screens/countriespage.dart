@@ -7,6 +7,7 @@ class CountriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
+    //print(prov.obj.length); 
     return (prov.bufferStatus)
         ? Center(
             child: CircularProgressIndicator(),

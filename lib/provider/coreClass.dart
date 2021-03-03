@@ -18,7 +18,7 @@ class GlobalResponse {
       deaths: json['deaths'],
       recovered: json['recovered'],
       active: json['active'],
-      affectedCountries: json['affectedCountries'],
+      affectedCountries: json['affectedCountries'], 
     );
   }
 

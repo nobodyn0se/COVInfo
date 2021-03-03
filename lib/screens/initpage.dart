@@ -62,6 +62,7 @@ class _InitPageState extends State<InitPage> {
       Future.delayed(Duration.zero, () {
         provGlo.getDataGlobal(context);
       }).then((_) => provCount.getDataCountries(context));
+      asdad = !asdad; 
     }
     super.didChangeDependencies();
   }

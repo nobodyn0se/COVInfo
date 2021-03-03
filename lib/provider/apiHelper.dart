@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ncov_visual/provider/coreClass.dart';
 
 class GlobalResponseHelper extends ChangeNotifier {
-  GlobalResponse obj = GlobalResponse();
-
+  dynamic obj; 
   bool bufferStatus = true;
 
   getDataGlobal(context) async {
@@ -17,14 +16,14 @@ class GlobalResponseHelper extends ChangeNotifier {
 }
 
 class CountriesResponseHelper extends ChangeNotifier {
-  List<CountriesResponse> obj = List<CountriesResponse>();
+  List<dynamic> obj = List<dynamic>();
   bool bufferStatus = true;
 
   getDataCountries(context) async {
     bufferStatus = true;
-    obj = await fetchDataCountries(context);
+    obj = await fetchDataCountries(context); //list of objects[0, 1]
     bufferStatus = false;
 
-    notifyListeners(); 
+    notifyListeners();
   }
 }
