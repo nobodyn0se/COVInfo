@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screen_size.dart';
 
 class IndiaPage extends StatefulWidget {
-  IndiaPage({Key key}) : super(key: key); 
 
   @override
   IndiaPageState createState() => IndiaPageState();
@@ -9,16 +9,33 @@ class IndiaPage extends StatefulWidget {
 
 class IndiaPageState extends State<IndiaPage> {
   @override
+  void initState() {
+    print("India Page Initialized\n"); 
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        backgroundColor: Colors.green[700],
-        title: Text('India (Detailed)'),
-      ),
-      body: Center(
-        child: Text('IndiaPage index 2'),
-      ),
+    return ListView.builder(
+      itemCount: 160,
+      itemBuilder: (context, index) {
+        return Card(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[
+                Text('India Aircraft listing: ${index + 1}',
+                    style: TextStyle(fontSize: ScreenSize.safeWidth * 4.5)),
+                SizedBox(height: ScreenSize.safeHeight * 1.5),
+                Text(
+                  'Airbus A320 with FADEC, ELAC, SEC and FlyByWire systems in place',
+                  style: TextStyle(fontSize: ScreenSize.safeWidth * 4),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

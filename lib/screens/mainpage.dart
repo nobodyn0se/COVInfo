@@ -1,24 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/provider/apiHelper.dart';
+import '../screen_size.dart';
+import 'package:provider/provider.dart';
 
-class MainPage extends StatefulWidget {
-  MainPage({Key key}) : super(key: key); 
+class MainPage extends StatelessWidget {
 
-  @override
-  MainPageState createState() => MainPageState();
-}
-
-class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue[900],
-        title: Text('Worldwide Statistics'),
-      ),
-      body: Center(
-        child: Text('MainPage index 1'),
-      ),
-    );
+    final prov = Provider.of<GlobalResponseHelper>(context);
+    //final prov2 = Provider.of<CountriesResponseHelper>(context, listen: false); 
+    return (prov.bufferStatus)
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : ListView.builder(
+              itemCount: prov.obj.affectedCountries,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text('Active ${prov.obj.active}',
+                        textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: ScreenSize.safeWidth * 4.5)),
+                        SizedBox(height: ScreenSize.safeHeight * 1.5),
+                        Text(
+                          'Total Cases ${prov.obj.cases}\n'
+                          'Deaths ${prov.obj.deaths}\n'
+                          'Affected Countries ${prov.obj.affectedCountries}',
+                          style: TextStyle(fontSize: ScreenSize.safeWidth * 4),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
   }
 }
