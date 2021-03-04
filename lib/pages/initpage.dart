@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
-import 'package:ncov_visual/screens/mainpage.dart';
-import 'package:ncov_visual/screens/countriespage.dart';
-import 'package:ncov_visual/screens/indiapage.dart';
+import 'package:ncov_visual/pages/mainpage.dart';
+import 'package:ncov_visual/pages/countriespage.dart';
+import 'package:ncov_visual/pages/indiapage.dart';
 import 'package:ncov_visual/screen_size.dart';
 import 'package:provider/provider.dart';
 

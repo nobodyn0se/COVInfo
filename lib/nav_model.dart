@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './screens/countriespage.dart';
-import './screens/indiapage.dart';
-import './screens/mainpage.dart';
+import 'pages/countriespage.dart';
+import 'pages/indiapage.dart';
+import 'pages/mainpage.dart';
 
 class NavModel extends ChangeNotifier {
   int _currentTab = 1;

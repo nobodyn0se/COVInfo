@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
 //import 'package:ncov_visual/screen_size.dart';
-import 'package:ncov_visual/screens/initpage.dart';
+import 'package:ncov_visual/pages/initpage.dart';
 import 'package:provider/provider.dart';
 import './provider/data.dart';
 

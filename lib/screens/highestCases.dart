@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:ncov_visual/provider/apiHelper.dart';
+import '../screen_size.dart';
+
+class HighListViewCases extends StatelessWidget {
+  const HighListViewCases({
+    @required this.prov,
+  });
+
+  final GlobalResponseHelper prov;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Highest Cases',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: ScreenSize.safeHeight * 27,
+          width: ScreenSize.safeWidth * 45,
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, id) {
+                return Card(
+                  color: Colors.grey[200],
+                  child: Row(
+                    //outer row, spacebetween
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment
+                        .center, //middle of the card
+                    children: [
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: ScreenSize.safeHeight * 2,
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                radius:
+                                    ScreenSize.safeHeight * 1.8,
+                                backgroundImage: NetworkImage(
+                                        '${prov.hCases[id].flagURL}') ??
+                                    Colors.grey,
+                              ),
+                            ),
+                            SizedBox(
+                              width: ScreenSize.safeHeight * 1,
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${prov.hCases[id].country}',
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.fade,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text('+${prov.hCases[id].cases}'),
+                    ],
+                  ),
+                );
+              },
+              itemCount: prov.hCases.length),
+        ),
+      ],
+    );
+  }
+}
