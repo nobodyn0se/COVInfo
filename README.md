@@ -28,12 +28,12 @@ Workflow: Changes in your feature branch (username_mod) will be rebased on top o
 ## Do not push changes to your mod branch remote unless your previous PR is merged to avoid the commits from appearing in the open PR ##  
 
 ## TO DO ## 
-1. :heavy_check_mark: Create a Bottom Navigation Bar to show different pages using tabs. 
-2. [ ] Display a list of countries with clickable detailed list of countrywide stats separately. (
-3. :heavy_exclamation_mark: Display Visualization page for India that includes testing data. (Partially done, vaccine data added) 
+1. [x] Create a Bottom Navigation Bar to show different pages using tabs. 
+2. [ ] Display a list of countries with clickable detailed list of countrywide stats separately. (Not clickable yet, routing TBA)
+3. [ ] Display Visualization page for India that includes testing data. (Partially done, vaccine data added) 
 4. [ ] Show a pie chart on the main tab for worldwide statistics. 
 5. [ ] Create a search bar for countries on the countries page. 
-6. :heavy_check_mark: Make the navigation bar dynamic with different material colors and animations. 
-7. :heavy_check_mark: Show top 5 countries in new detections, deaths and recoveries on the main page. 
-8. :heavy_check_mark: Create a loading screen until data is fetched. 
-9. :heavy_check_mark: Refresh data on all tabs when the refresh button is pressed from any page. 
+6. [x] Make the navigation bar dynamic with different material colors and animations. 
+7. [x] Show top 5 countries in new detections, deaths and recoveries on the main page. 
+8. [x] Create a loading screen until data is fetched. 
+9. [x] Refresh data on all tabs when the refresh button is pressed from any page. 
