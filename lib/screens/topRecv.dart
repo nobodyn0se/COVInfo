@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/pages/mainpage.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
 
 import '../screen_size.dart';
@@ -33,31 +34,7 @@ class TopListViewRecv extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.center, //middle of the card
                     children: [
-                      Expanded( //tell the row and text that its okay to be smaller 
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: ScreenSize.safeHeight * 2,
-                              backgroundColor: Colors.black,
-                              child: CircleAvatar(
-                                radius: ScreenSize.safeHeight * 1.8,
-                                backgroundImage:
-                                    NetworkImage('${prov.topRec[id].flagURL}') ?? Colors.grey,
-                              ),
-                            ),
-                            SizedBox(
-                              width: ScreenSize.safeHeight * 1,
-                            ),
-                            Expanded(
-                              child: Text(
-                                '${prov.topRec[id].country}',
-                                overflow: TextOverflow.fade,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      buildLeadingRow(id, prov.topRec),
                       Text('+${prov.topRec[id].todayRecovered}'),
                     ],
                   ),

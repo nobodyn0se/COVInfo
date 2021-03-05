@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/pages/mainpage.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
 
 import '../screen_size.dart';
@@ -33,27 +34,7 @@ class TopListViewCases extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment
                         .center, //middle of the card laterally
                     children: [
-                      Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: ScreenSize.safeHeight * 2,
-                              backgroundColor: Colors.black,
-                              child: CircleAvatar(
-                                radius: ScreenSize.safeHeight * 1.8,
-                                backgroundImage: NetworkImage(
-                                        '${prov.topCas[id].flagURL}') ??
-                                    Colors.grey,
-                              ),
-                            ),
-                            SizedBox(
-                              width: ScreenSize.safeHeight * 1,
-                            ),
-                            Expanded(child: Text('${prov.topCas[id].country}')),
-                          ],
-                        ),
-                      ),
+                      buildLeadingRow(id, prov.topCas),
                       Text('+${prov.topCas[id].todayCases}'),
                     ],
                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
+import 'package:ncov_visual/provider/coreClass.dart';
 import 'package:ncov_visual/screens/highestRecv.dart';
+import 'package:ncov_visual/screens/highestTests.dart';
 import 'package:ncov_visual/screens/topActive.dart';
 import 'package:ncov_visual/screens/topCases.dart';
 import 'package:ncov_visual/screens/topDeaths.dart';
@@ -60,16 +62,17 @@ class MainPage extends StatelessWidget {
                     HighListViewDeaths(prov: prov),
                   ],
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    const Text(
-                      'Highest Recoveries',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
                     HighListViewRecoveries(prov: prov),
+                    HighListViewTests(prov: prov),
                   ],
-                )
+                ),
+                Container(
+                  height: ScreenSize.safeHeight*10,
+                ), 
               ],
             ),
           );
@@ -107,3 +110,33 @@ class DisplayGlobalData extends StatelessWidget {
     );
   }
 }
+
+Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: ScreenSize.safeHeight * 2,
+            backgroundColor: Colors.black,
+            child: CircleAvatar(
+              radius: ScreenSize.safeHeight * 1.8,
+              backgroundImage:
+                  NetworkImage('${buildList[id].flagURL}') ?? Colors.grey,
+            ),
+          ),
+          SizedBox(
+            width: ScreenSize.safeHeight * 1,
+          ),
+          Expanded(
+            child: Text(
+              '${buildList[id].country}',
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.fade,
+            ),
+          ),
+        ],
+      ),
+    );
+  }

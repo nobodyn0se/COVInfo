@@ -25,7 +25,7 @@ class CountriesPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
                           radius: ScreenSize.safeHeight * 4,
@@ -40,8 +40,8 @@ class CountriesPage extends StatelessWidget {
                           width: ScreenSize.safeWidth * 2,
                         ),
                         Text(
-                          '${uid.country}\n\n'
-                          'Active: ${uid.active}',
+                          '${uid.country}\n'
+                          'A: ${uid.active}',
                           overflow: TextOverflow.fade,
                         ),
                       ],

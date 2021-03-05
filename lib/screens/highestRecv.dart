@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/pages/mainpage.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
-
 import '../screen_size.dart';
 
 class HighListViewRecoveries extends StatelessWidget {
@@ -12,54 +12,36 @@ class HighListViewRecoveries extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: ScreenSize.safeHeight * 27,
-      width: ScreenSize.safeWidth * 45,
-      child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, id) {
-            return Card(
-              color: Colors.grey[200],
-              child: Row(
-                //outer row, spacebetween
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment:
-                    CrossAxisAlignment.center, //middle of the card
-                children: [
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: ScreenSize.safeHeight * 2,
-                          backgroundColor: Colors.black,
-                          child: CircleAvatar(
-                            radius: ScreenSize.safeHeight * 1.8,
-                            backgroundImage:
-                                NetworkImage('${prov.hRecover[id].flagURL}') ??
-                                    Colors.grey,
-                          ),
-                        ),
-                        SizedBox(
-                          width: ScreenSize.safeHeight * 1,
-                        ),
-                        Expanded(
-                          child: Text(
-                            '${prov.hRecover[id].country}',
-                            maxLines: 1,
-                            softWrap: false,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ),
-                      ],
-                    ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Highest Recoveries',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: ScreenSize.safeHeight * 27,
+          width: ScreenSize.safeWidth * 45,
+          child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, id) {
+                return Card(
+                  color: Colors.grey[200],
+                  child: Row(
+                    //outer row, spacebetween
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.center, //middle of the card
+                    children: [
+                      buildLeadingRow(id, prov.hRecover), 
+                      Text('+${prov.hRecover[id].recovered}'),
+                    ],
                   ),
-                  Text('+${prov.hRecover[id].recovered}'),
-                ],
-              ),
-            );
-          },
-          itemCount: prov.hRecover.length),
+                );
+              },
+              itemCount: prov.hRecover.length),
+        ),
+      ],
     );
   }
 }

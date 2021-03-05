@@ -15,6 +15,7 @@ class GlobalResponseHelper extends ChangeNotifier {
   List<CountriesResponse> hDeaths = List<CountriesResponse>();
   List<CountriesResponse> hCases = List<CountriesResponse>();
   List<CountriesResponse> hRecover = List<CountriesResponse>();
+  List<CountriesResponse> hTests = List<CountriesResponse>();
 
   bool bufferStatus = true;
 
@@ -49,10 +50,15 @@ class GlobalResponseHelper extends ChangeNotifier {
 
     hRecover = List.from(obj[1]);
     hRecover.sort((a, b) => b.recovered.compareTo(a.recovered));
-    this.hRecover = hRecover.sublist(0, 5); 
+    this.hRecover = hRecover.sublist(0, 5);
+
+    hTests = List.from(obj[1]);
+    hTests.sort((a, b) => b.tests.compareTo(a.tests));
+    this.hTests = hTests.sublist(0, 5);
 
     bufferStatus = false;
-    obj.clear();
+
+    obj.clear(); 
 
     notifyListeners();
   }

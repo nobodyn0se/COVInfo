@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ncov_visual/pages/mainpage.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
+import 'package:ncov_visual/provider/coreClass.dart';
 import '../screen_size.dart';
 
-class TopListViewActive extends StatelessWidget {
-  const TopListViewActive({
+class HighListViewTests extends StatelessWidget {
+  const HighListViewTests({
     @required this.prov,
   });
 
@@ -16,14 +17,14 @@ class TopListViewActive extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          'Highest Active',
+          'Highest Tests',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: ScreenSize.safeHeight * 27,
           width: ScreenSize.safeWidth * 45,
           child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, id) {
                 return Card(
                   color: Colors.grey[200],
@@ -33,13 +34,13 @@ class TopListViewActive extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.center, //middle of the card
                     children: [
-                      buildLeadingRow(id, prov.topAct),
-                      Text('+${prov.topAct[id].active}'),
+                      buildLeadingRow(id, prov.hTests),
+                      Text('+${prov.hTests[id].tests}'),
                     ],
                   ),
                 );
               },
-              itemCount: prov.topAct.length),
+              itemCount: prov.hTests.length),
         ),
       ],
     );
