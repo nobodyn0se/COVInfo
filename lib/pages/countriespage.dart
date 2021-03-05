@@ -32,8 +32,7 @@ class CountriesPage extends StatelessWidget {
                           backgroundColor: Colors.black,
                           child: CircleAvatar(
                             radius: ScreenSize.safeHeight * 3.6,
-                            backgroundImage:
-                                NetworkImage(uid.flagURL),
+                            backgroundImage: NetworkImage(uid.flagURL),
                           ), //inner
                         ),
                         SizedBox(
@@ -47,7 +46,7 @@ class CountriesPage extends StatelessWidget {
                       ],
                     ),
 
-                    // Column(    edit this for better UI 
+                    // Column(    edit this for better UI
                     //   crossAxisAlignment: CrossAxisAlignment.start,
                     //   mainAxisAlignment: MainAxisAlignment.center,
                     //   children: [
@@ -61,7 +60,6 @@ class CountriesPage extends StatelessWidget {
                     //     ), //recovery
                     //   ],
                     // )
-
                   ], //outer children
                 ),
               );

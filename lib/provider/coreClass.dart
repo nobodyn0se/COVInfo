@@ -18,7 +18,7 @@ class GlobalResponse {
       deaths: json['deaths'],
       recovered: json['recovered'],
       active: json['active'],
-      affectedCountries: json['affectedCountries'], 
+      affectedCountries: json['affectedCountries'],
     );
   }
 
@@ -81,5 +81,29 @@ class CountriesResponse {
         cpom: json['casesPerOneMillion'].truncate(),
         dpom: json['deathsPerOneMillion'].truncate(),
         rpom: json['recovered'].truncate());
+  }
+}
+
+class VaccineDataResponse {
+  final List<String> dates;
+  final List<int> doses;
+  final List<int> perDay;
+
+  VaccineDataResponse({this.dates, this.doses, this.perDay});
+
+  factory VaccineDataResponse.fromJson(Map<String, dynamic> json) {
+    Map<String, int> timeMap =
+        Map.from(json["timeline"]).map((k, v) => MapEntry<String, int>(k, v));
+
+    List<String> cdates = timeMap.keys.toList();
+    List<int> cdoses = timeMap.values.toList();
+    List<int> daily = [];
+
+    for (int i = 0; i < cdoses.length - 1; ++i) {
+      daily.add(cdoses[i + 1] - cdoses[i]); //one less than dates' list
+    }
+    daily = daily.sublist(0, daily.length - 1);
+    cdates = cdates.sublist(1, cdates.length - 1); //keep equal length
+    return VaccineDataResponse(dates: cdates, doses: cdoses, perDay: daily);
   }
 }

@@ -24,7 +24,7 @@ class TopListViewCases extends StatelessWidget {
           height: ScreenSize.safeHeight * 27,
           width: ScreenSize.safeWidth * 45,
           child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, id) {
                 return Card(
                   color: Colors.grey[200],

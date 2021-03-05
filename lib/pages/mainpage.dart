@@ -71,8 +71,8 @@ class MainPage extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height: ScreenSize.safeHeight*10,
-                ), 
+                  height: ScreenSize.safeHeight * 10,
+                ),
               ],
             ),
           );
@@ -112,31 +112,31 @@ class DisplayGlobalData extends StatelessWidget {
 }
 
 Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
-    return Expanded(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: ScreenSize.safeHeight * 2,
-            backgroundColor: Colors.black,
-            child: CircleAvatar(
-              radius: ScreenSize.safeHeight * 1.8,
-              backgroundImage:
-                  NetworkImage('${buildList[id].flagURL}') ?? Colors.grey,
-            ),
+  return Expanded(
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: ScreenSize.safeHeight * 2,
+          backgroundColor: Colors.black,
+          child: CircleAvatar(
+            radius: ScreenSize.safeHeight * 1.8,
+            backgroundImage:
+                NetworkImage('${buildList[id].flagURL}') ?? Colors.grey,
           ),
-          SizedBox(
-            width: ScreenSize.safeHeight * 1,
+        ),
+        SizedBox(
+          width: ScreenSize.safeHeight * 1,
+        ),
+        Expanded(
+          child: Text(
+            '${buildList[id].country}',
+            maxLines: 1,
+            softWrap: false,
+            overflow: TextOverflow.fade,
           ),
-          Expanded(
-            child: Text(
-              '${buildList[id].country}',
-              maxLines: 1,
-              softWrap: false,
-              overflow: TextOverflow.fade,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}

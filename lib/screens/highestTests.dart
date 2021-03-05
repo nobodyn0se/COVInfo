@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ncov_visual/pages/mainpage.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
-import 'package:ncov_visual/provider/coreClass.dart';
 import '../screen_size.dart';
 
 class HighListViewTests extends StatelessWidget {

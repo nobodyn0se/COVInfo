@@ -1,5 +1,4 @@
 import 'package:ncov_visual/provider/coreClass.dart';
-
 import './data.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -58,22 +57,29 @@ class GlobalResponseHelper extends ChangeNotifier {
 
     bufferStatus = false;
 
-    obj.clear(); 
+    obj.clear();
 
     notifyListeners();
   }
 }
 
 class CountriesResponseHelper extends ChangeNotifier {
+  VaccineDataResponse vaccData = VaccineDataResponse();
+  List<dynamic> recObj = List<dynamic>();
   List<CountriesResponse> countriesList =
       List<CountriesResponse>(); //instantiation is important here
   bool bufferStatus = true;
 
   getDataCountries(context) async {
     bufferStatus = true;
-    countriesList = await fetchDataCountries(context);
+    recObj = await fetchDataCountries(context);
+    countriesList = List.from(recObj[0]);
+    vaccData = recObj[1]; //gets map from the list
     bufferStatus = false;
 
+    recObj.clear();
     notifyListeners();
   }
 }
+
+//three async calls cause stack overflow

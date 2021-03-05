@@ -14,7 +14,7 @@ class InitPage extends StatefulWidget {
 
 class _InitPageState extends State<InitPage> {
   var asdad = false;
-  var provGlo, provCount;
+  var provGlo, provCount, provNd;
 
   final List<Map<String, dynamic>> _tabs = [
     {
@@ -59,10 +59,11 @@ class _InitPageState extends State<InitPage> {
       ScreenSize().init(context);
       provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
       provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
+      //provNd = Provider.of<VaccineResponseHelper>(context, listen: false);
       Future.delayed(Duration.zero, () {
         provGlo.getDataGlobal(context);
       }).then((_) => provCount.getDataCountries(context));
-      asdad = !asdad; 
+      asdad = !asdad;
     }
     super.didChangeDependencies();
   }
@@ -126,8 +127,3 @@ class _InitPageState extends State<InitPage> {
     );
   }
 }
-
-//you need the provider future to initialize variables of a class that you predefine and then
-//you gotta access the variables somehow which has been there, but no separate instance should
-//be created so you gotta devise a way to do that without firing up the instance
-//that will be good to go
