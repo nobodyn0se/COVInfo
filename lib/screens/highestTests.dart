@@ -34,7 +34,7 @@ class HighListViewTests extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.hTests),
-                      Text('+${prov.hTests[id].tests}'),
+                      Text('${prov.hTests[id].tests}'),
                     ],
                   ),
                 );

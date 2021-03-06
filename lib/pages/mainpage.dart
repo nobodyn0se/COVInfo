@@ -104,7 +104,7 @@ class DisplayGlobalData extends StatelessWidget {
           height: ScreenSize.safeHeight * 1.5,
         ),
         Text(
-            'Mortality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
+            'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
             'Recovery Rate: ${(prov.globalData.recovered / prov.globalData.cases * 100).toStringAsFixed(2)}%'),
       ],
     );

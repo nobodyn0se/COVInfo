@@ -34,7 +34,7 @@ class HighListViewRecoveries extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.hRecover),
-                      Text('+${prov.hRecover[id].recovered}'),
+                      Text('${prov.hRecover[id].recovered}'),
                     ],
                   ),
                 );

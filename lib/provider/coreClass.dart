@@ -102,8 +102,42 @@ class VaccineDataResponse {
     for (int i = 0; i < cdoses.length - 1; ++i) {
       daily.add(cdoses[i + 1] - cdoses[i]); //one less than dates' list
     }
-    daily = daily.sublist(0, daily.length - 1);
-    cdates = cdates.sublist(1, cdates.length - 1); //keep equal length
+    daily = daily.sublist(0, daily.length);
+    cdates = cdates.sublist(1, cdates.length); //keep equal length
     return VaccineDataResponse(dates: cdates, doses: cdoses, perDay: daily);
+  }
+}
+
+class TestingData {
+  final int totalRows;
+  final List<TestRows> rows;
+
+  TestingData({this.totalRows, this.rows});
+
+  factory TestingData.fromJson(Map<String, dynamic> json) {
+    return TestingData(
+        totalRows: json["total_rows"],
+        rows:
+            List<TestRows>.from(json["rows"].map((e) => TestRows.fromJson(e))),);
+  }
+}
+
+class TestRows {
+  final Val value;
+
+  TestRows({this.value});
+
+  factory TestRows.fromJson(Map<String, dynamic> json) {
+    return TestRows(value: Val.fromJson(json["value"]));
+  }
+}
+
+class Val {
+  final int samples;
+
+  Val({this.samples});
+
+  factory Val.fromJson(Map<String, dynamic> json) {
+    return Val(samples: json["samples"]);
   }
 }

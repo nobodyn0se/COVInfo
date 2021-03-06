@@ -13,8 +13,9 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-  var asdad = false;
-  var provGlo, provCount, provNd;
+  bool asdad = false; 
+  GlobalResponseHelper provGlo;
+  CountriesResponseHelper provCount;
 
   final List<Map<String, dynamic>> _tabs = [
     {
@@ -59,7 +60,7 @@ class _InitPageState extends State<InitPage> {
       ScreenSize().init(context);
       provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
       provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
-      //provNd = Provider.of<VaccineResponseHelper>(context, listen: false);
+
       Future.delayed(Duration.zero, () {
         provGlo.getDataGlobal(context);
       }).then((_) => provCount.getDataCountries(context));
@@ -93,6 +94,9 @@ class _InitPageState extends State<InitPage> {
         child: Icon(Icons.refresh),
         elevation: ScreenSize.safeWidth * 2,
       ),
+
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniEndFloat,
 
       bottomNavigationBar: CurvedNavigationBar(
         color: _tabs[initIndex]['bgcolor'],

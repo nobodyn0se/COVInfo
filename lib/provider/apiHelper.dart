@@ -68,6 +68,8 @@ class CountriesResponseHelper extends ChangeNotifier {
   List<dynamic> recObj = List<dynamic>();
   List<CountriesResponse> countriesList =
       List<CountriesResponse>(); //instantiation is important here
+
+  TestingData testObj = TestingData();
   bool bufferStatus = true;
 
   getDataCountries(context) async {
@@ -75,9 +77,10 @@ class CountriesResponseHelper extends ChangeNotifier {
     recObj = await fetchDataCountries(context);
     countriesList = List.from(recObj[0]);
     vaccData = recObj[1]; //gets map from the list
+    testObj = recObj[2];
     bufferStatus = false;
 
-    recObj.clear();
+    recObj.clear(); 
     notifyListeners();
   }
 }

@@ -34,7 +34,7 @@ class HighListViewCases extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.hCases),
-                      Text('+${prov.hCases[id].cases}'),
+                      Text('${prov.hCases[id].cases}'),
                     ],
                   ),
                 );

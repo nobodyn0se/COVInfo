@@ -35,7 +35,7 @@ class HighListViewDeaths extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.hDeaths),
-                      Text('+${prov.hDeaths[id].deaths}'),
+                      Text('${prov.hDeaths[id].deaths}'),
                     ],
                   ),
                 );

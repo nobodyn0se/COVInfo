@@ -24,42 +24,61 @@ class CountriesPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: ScreenSize.safeHeight * 4,
-                          backgroundColor: Colors.black,
-                          child: CircleAvatar(
-                            radius: ScreenSize.safeHeight * 3.6,
-                            backgroundImage: NetworkImage(uid.flagURL),
-                          ), //inner
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: ScreenSize.safeWidth * 2,
+                            horizontal: ScreenSize.safeWidth * 2),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: ScreenSize.safeHeight * 4,
+                              backgroundColor: Colors.black,
+                              child: CircleAvatar(
+                                radius: ScreenSize.safeHeight * 3.6,
+                                backgroundImage: NetworkImage(uid.flagURL),
+                              ), //inner
+                            ),
+                            SizedBox(
+                              width: ScreenSize.safeWidth * 2,
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${uid.country}\n'
+                                'A: ${uid.active}',
+                                overflow: TextOverflow.fade,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: ScreenSize.safeWidth * 2,
-                        ),
-                        Text(
-                          '${uid.country}\n'
-                          'A: ${uid.active}',
-                          overflow: TextOverflow.fade,
-                        ),
-                      ],
+                      ),
                     ),
-
-                    // Column(    edit this for better UI
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     RowWithNumbers(ic: Icons.group, disp: uid.cases),
-                    //     RowWithNumbers(
-                    //         ic: Icons.airline_seat_flat_angled,
-                    //         disp: uid.deaths),
-                    //     RowWithNumbers(
-                    //       disp: uid.recovered,
-                    //       ic: Icons.thumb_up,
-                    //     ), //recovery
-                    //   ],
-                    // )
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontFamily: 'Courier',
+                          fontSize: ScreenSize.safeHeight * 2,
+                          fontWeight: FontWeight.w900,
+                        ),
+                        children: [
+                          TextSpan(
+                              text: 'C: ${uid.cases}\n',
+                              style: TextStyle(color: Colors.blue[800])),
+                          TextSpan(
+                            text: 'D: ${uid.deaths}\n',
+                            style: TextStyle(color: Colors.red[800]),
+                          ),
+                          TextSpan(
+                            text: 'R: ${uid.recovered}',
+                            style: TextStyle(color: Colors.lightGreen[800]),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Text('C: ${uid.cases}\n'
+                    //     'D: ${uid.deaths}\n'
+                    //     'R: ${uid.recovered}'),
                   ], //outer children
                 ),
               );

@@ -34,7 +34,7 @@ class TopListViewActive extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.topAct),
-                      Text('+${prov.topAct[id].active}'),
+                      Text('${prov.topAct[id].active}'),
                     ],
                   ),
                 );
