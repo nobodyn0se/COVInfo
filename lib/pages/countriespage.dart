@@ -13,7 +13,7 @@ class CountriesPage extends StatelessWidget {
             child: CircularProgressIndicator(),
           )
         : ListView.builder(
-            padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
+            //padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
             itemCount: prov.countriesList.length,
             itemBuilder: (context, id) {
               var uid = prov.countriesList[id];
@@ -46,7 +46,9 @@ class CountriesPage extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 '${uid.country}\n'
-                                'A: ${uid.active}',
+                                        'A: ${uid.active} ' +
+                                    netActive(
+                                        uid.todayCases, uid.todayRecovered),
                                 overflow: TextOverflow.fade,
                               ),
                             ),
@@ -114,4 +116,13 @@ class RowWithNumbers extends StatelessWidget {
       ],
     );
   }
+}
+
+String netActive(int newCases, int newRec) {
+  final net = newCases - newRec;
+
+  if (net == 0)
+    return '';
+  else if (net > 0) return '(+$net)'; 
+  else return '(-$net)'; 
 }

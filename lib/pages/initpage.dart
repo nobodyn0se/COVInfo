@@ -102,7 +102,7 @@ class _InitPageState extends State<InitPage> {
         color: _tabs[initIndex]['bgcolor'],
         backgroundColor: Colors.grey[50], //Scaffold color
         buttonBackgroundColor: _tabs[initIndex]['bgcolor'],
-        height: ScreenSize.blockHeight * 7, //8%
+        height: ScreenSize.blockHeight * 6.4, //8%
         index: initIndex, //sets the initial index for BottomNavigationBar
         onTap: (int index) {
           //changes both BNB index and PageIndex referenced from <List> _screen

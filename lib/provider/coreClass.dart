@@ -4,16 +4,21 @@ class GlobalResponse {
   final int recovered;
   final int active;
   final int affectedCountries;
+  final DateTime updated;
 
   GlobalResponse(
       {this.cases,
       this.deaths,
       this.recovered,
       this.active,
-      this.affectedCountries});
+      this.affectedCountries,
+      this.updated});
 
   factory GlobalResponse.fromJson(Map<String, dynamic> json) {
+    final toDateTime = DateTime.fromMillisecondsSinceEpoch(json['updated']);
+    
     return GlobalResponse(
+      updated: toDateTime,
       cases: json['cases'],
       deaths: json['deaths'],
       recovered: json['recovered'],
@@ -102,8 +107,9 @@ class VaccineDataResponse {
     for (int i = 0; i < cdoses.length - 1; ++i) {
       daily.add(cdoses[i + 1] - cdoses[i]); //one less than dates' list
     }
-    daily = daily.sublist(0, daily.length);
-    cdates = cdates.sublist(1, cdates.length); //keep equal length
+    daily = daily.sublist(0, daily.length - 1);
+    //print("Daily: ${daily.length}");
+    cdates = cdates.sublist(1, cdates.length - 1); //keep equal length
     return VaccineDataResponse(dates: cdates, doses: cdoses, perDay: daily);
   }
 }
@@ -111,14 +117,25 @@ class VaccineDataResponse {
 class TestingData {
   final int totalRows;
   final List<TestRows> rows;
+  final List<int> dailytests;
 
-  TestingData({this.totalRows, this.rows});
+  TestingData({this.totalRows, this.rows, this.dailytests});
 
   factory TestingData.fromJson(Map<String, dynamic> json) {
+    List<TestRows> passList =
+        List<TestRows>.from(json["rows"].map((e) => TestRows.fromJson(e)));
+    passList = passList.sublist(passList.length - 30, passList.length);
+
+    List<int> tests = [];
+    for (int i = 0; i < passList.length - 2; ++i) {
+      tests.add(passList[i + 1].value.samples - passList[i].value.samples);
+    }
+    //return 29 days of data
     return TestingData(
-        totalRows: json["total_rows"],
-        rows:
-            List<TestRows>.from(json["rows"].map((e) => TestRows.fromJson(e))),);
+      totalRows: json["total_rows"],
+      rows: passList,
+      dailytests: tests,
+    );
   }
 }
 
