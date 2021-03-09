@@ -39,7 +39,10 @@ class IndiaPageState extends State<IndiaPage> {
                   margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
                   padding: EdgeInsets.only(right: ScreenSize.safeWidth * 2),
                   child: Text(
-                    'Last Updated at ' + retUpdated(glob.globalData.updated.hour) + ':' + retUpdated(glob.globalData.updated.minute), 
+                    'Updated at ' +
+                        retUpdated(glob.globalData.lastUpdate.hour) +
+                        ':' +
+                        retUpdated(glob.globalData.lastUpdate.minute),
                     textAlign: TextAlign.end,
                   ),
                 ),

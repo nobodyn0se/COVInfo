@@ -98,10 +98,10 @@ class DisplayGlobalData extends StatelessWidget {
               ScreenSize.safeWidth * 50, 0, 0, ScreenSize.safeHeight * 1),
           padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
           child: Text(
-            'Last Updated at ' +
-                retUpdated(prov.globalData.updated.hour) +
+            'Updated at ' +
+                retUpdated(prov.globalData.lastUpdate.hour) +
                 ':' +
-                retUpdated(prov.globalData.updated.minute),
+                retUpdated(prov.globalData.lastUpdate.minute),
             textAlign: TextAlign.end,
           ),
         ),

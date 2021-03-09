@@ -5,6 +5,7 @@ class GlobalResponse {
   final int active;
   final int affectedCountries;
   final DateTime updated;
+  final DateTime lastUpdate; 
 
   GlobalResponse(
       {this.cases,
@@ -12,12 +13,14 @@ class GlobalResponse {
       this.recovered,
       this.active,
       this.affectedCountries,
-      this.updated});
+      this.updated, 
+      this.lastUpdate});
 
   factory GlobalResponse.fromJson(Map<String, dynamic> json) {
     final toDateTime = DateTime.fromMillisecondsSinceEpoch(json['updated']);
     
     return GlobalResponse(
+      lastUpdate: DateTime.now(), 
       updated: toDateTime,
       cases: json['cases'],
       deaths: json['deaths'],
