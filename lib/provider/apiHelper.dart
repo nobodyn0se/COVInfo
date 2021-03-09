@@ -80,9 +80,14 @@ class CountriesResponseHelper extends ChangeNotifier {
     testObj = recObj[2];
     bufferStatus = false;
 
-    recObj.clear(); 
+    recObj.clear();
     notifyListeners();
   }
 }
 
 //three async calls cause stack overflow
+
+String retUpdated(int timeVal) {
+  if (timeVal < 10) return '0' + timeVal.toString(); 
+  else return timeVal.toString(); 
+}

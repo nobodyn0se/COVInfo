@@ -33,7 +33,7 @@ class MainPage extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: ScreenSize.safeHeight * 2),
                   elevation: ScreenSize.safeHeight * 1,
                   child: Padding(
-                    padding: EdgeInsets.all(ScreenSize.safeHeight*1),
+                    padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
                     child: DisplayGlobalData(prov: prov),
                   ),
                 ),
@@ -94,9 +94,16 @@ class DisplayGlobalData extends StatelessWidget {
       children: <Widget>[
         Container(
           width: ScreenSize.safeWidth * 50,
-          margin: EdgeInsets.fromLTRB(ScreenSize.safeWidth * 50, 0,  0, ScreenSize.safeHeight*1),
+          margin: EdgeInsets.fromLTRB(
+              ScreenSize.safeWidth * 50, 0, 0, ScreenSize.safeHeight * 1),
           padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
-          child: Text('Last Updated at ${prov.globalData.updated.hour}:${prov.globalData.updated.minute}', textAlign: TextAlign.end,),
+          child: Text(
+            'Last Updated at ' +
+                retUpdated(prov.globalData.updated.hour) +
+                ':' +
+                retUpdated(prov.globalData.updated.minute),
+            textAlign: TextAlign.end,
+          ),
         ),
         Text('Total Cases ${prov.globalData.cases}',
             style: TextStyle(fontSize: ScreenSize.safeWidth * 4.5)),

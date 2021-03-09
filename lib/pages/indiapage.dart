@@ -39,7 +39,7 @@ class IndiaPageState extends State<IndiaPage> {
                   margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
                   padding: EdgeInsets.only(right: ScreenSize.safeWidth * 2),
                   child: Text(
-                    'Last Updated at ${glob.globalData.updated.hour}:${glob.globalData.updated.minute}',
+                    'Last Updated at ' + retUpdated(glob.globalData.updated.hour) + ':' + retUpdated(glob.globalData.updated.minute), 
                     textAlign: TextAlign.end,
                   ),
                 ),
@@ -47,7 +47,7 @@ class IndiaPageState extends State<IndiaPage> {
                   margin: EdgeInsets.only(top: ScreenSize.safeHeight * 1),
                   elevation: ScreenSize.safeHeight * 1,
                   child: Container(
-                    padding: EdgeInsets.all(ScreenSize.safeWidth * 5),
+                    padding: EdgeInsets.all(ScreenSize.safeWidth * 3),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
