@@ -20,15 +20,14 @@ class IndiaPageState extends State<IndiaPage> {
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
     final glob = Provider.of<GlobalResponseHelper>(context);
-    VaccineDataResponse lst = prov.vaccData;
-    List<TestRows> testlist = prov.testObj.rows;
-    return (prov.bufferStatus)
+    
+    return (prov.bufferStatus && glob.bufferStatus)
         ? Center(
             child: CircularProgressIndicator(),
           )
         : Container(
             margin: EdgeInsets.only(top: ScreenSize.safeHeight * 1),
-            padding: EdgeInsets.all(ScreenSize.safeWidth * 1),
+            //padding: EdgeInsets.all(ScreenSize.safeWidth * 1),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,20 +54,21 @@ class IndiaPageState extends State<IndiaPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Data upto: ${lst.dates[lst.dates.length - 1]}\n'),
+                        Text('Data upto: ${prov.vaccData.dates[prov.vaccData.dates.length - 1]}\n'),
                         Text(
-                            'Total Vaccinations: ${lst.doses[lst.doses.length - 1]}'),
+                            'Total Vaccinations: ${prov.vaccData.doses[prov.vaccData.doses.length - 1]}'),
                         Text(
-                            'Innoculations in 24h: ${dailyDoses(lst.perDay[lst.perDay.length - 2], lst.perDay[lst.perDay.length - 1])}\n'),
+                            'Innoculations in 24h: ${dailyDoses(prov.vaccData.perDay[prov.vaccData.perDay.length - 2], prov.vaccData.perDay[prov.vaccData.perDay.length - 1])}\n'),
                         Text(
-                            'Samples tested: ${testlist[testlist.length - 1].value.samples}'),
-                        Text(
-                            'Tested in 24h: ${dailyDoses(testlist[testlist.length - 2].value.samples - testlist[testlist.length - 3].value.samples, testlist[testlist.length - 1].value.samples - testlist[testlist.length - 2].value.samples)}'),
+                            'Samples tested: ${prov.testObj.rows[prov.testObj.rows.length - 1].value.samples}'),
+                        Text('Tested in 24h: '
+                            '${dailyDoses(prov.testObj.dailytests[prov.testObj.dailytests.length - 2], prov.testObj.dailytests[prov.testObj.dailytests.length - 1])}\n'),
+                        Text('ETA at current rate: ${prov.vaccData.eta} years'),
                       ],
                     ),
                   ),
                 ),
-                //Text('Testing list length: ${testlist.length}'),
+                //Text('Testing list length: ${prov.testObj.rows.length}'),
                 SizedBox(
                   width: ScreenSize.safeWidth * 90,
                   child: Row(
@@ -108,11 +108,11 @@ class IndiaPageState extends State<IndiaPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${lst.dates[id]}',
+                                      '${prov.vaccData.dates[id]}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(lst.perDay[id]),
+                                      notZero(prov.vaccData.perDay[id]),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -120,7 +120,7 @@ class IndiaPageState extends State<IndiaPage> {
                               ),
                             );
                           },
-                          itemCount: lst.perDay.length,
+                          itemCount: prov.vaccData.perDay.length,
                         ),
                       ),
                       SizedBox(
@@ -139,7 +139,7 @@ class IndiaPageState extends State<IndiaPage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${lst.dates[id]}',
+                                      '${prov.vaccData.dates[id]}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(

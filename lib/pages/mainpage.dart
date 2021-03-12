@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ncov_visual/charts/pieChart.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
 import 'package:ncov_visual/provider/coreClass.dart';
 import 'package:ncov_visual/screens/highestRecv.dart';
@@ -29,13 +30,12 @@ class MainPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               //Outer column, overall page
               children: [
-                Card(
+                Container(
+                  color: Colors.grey[50],
                   margin: EdgeInsets.only(bottom: ScreenSize.safeHeight * 2),
-                  elevation: ScreenSize.safeHeight * 1,
-                  child: Padding(
-                    padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
-                    child: DisplayGlobalData(prov: prov),
-                  ),
+                  //elevation: ScreenSize.safeHeight * 1,
+                  padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
+                  child: DisplayGlobalData(prov: prov),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,6 +93,7 @@ class DisplayGlobalData extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
+          //color: Colors.grey[50],
           width: ScreenSize.safeWidth * 50,
           margin: EdgeInsets.fromLTRB(
               ScreenSize.safeWidth * 50, 0, 0, ScreenSize.safeHeight * 1),
@@ -105,17 +106,24 @@ class DisplayGlobalData extends StatelessWidget {
             textAlign: TextAlign.end,
           ),
         ),
-        Text('Total Cases ${prov.globalData.cases}',
-            style: TextStyle(fontSize: ScreenSize.safeWidth * 4.5)),
-        SizedBox(height: ScreenSize.safeHeight * 1.5),
-        Text(
-          'Active ${prov.globalData.active}\n'
-          'Deaths ${prov.globalData.deaths}\n'
-          'Recoveries ${prov.globalData.recovered}',
-          style: TextStyle(fontSize: ScreenSize.safeWidth * 4),
-        ),
-        SizedBox(
-          height: ScreenSize.safeHeight * 1.5,
+        // Text('Total Cases ${prov.globalData.cases}',
+        //     style: TextStyle(fontSize: ScreenSize.safeWidth * 4.5)),
+        // SizedBox(height: ScreenSize.safeHeight * 1.5),
+        // Text(
+        //   'Active ${prov.globalData.active}\n'
+        //   'Deaths ${prov.globalData.deaths}\n'
+        //   'Recoveries ${prov.globalData.recovered}',
+        //   style: TextStyle(fontSize: ScreenSize.safeWidth * 4),
+        // ),
+        // SizedBox(
+        //   height: ScreenSize.safeHeight * 1.5,
+        // ),
+        GlobalPieChart(
+          chartObjects: [
+            prov.globalData.active,
+            prov.globalData.deaths,
+            prov.globalData.recovered,
+          ],
         ),
         Text(
             'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'

@@ -5,7 +5,7 @@ class GlobalResponse {
   final int active;
   final int affectedCountries;
   final DateTime updated;
-  final DateTime lastUpdate; 
+  final DateTime lastUpdate;
 
   GlobalResponse(
       {this.cases,
@@ -13,14 +13,14 @@ class GlobalResponse {
       this.recovered,
       this.active,
       this.affectedCountries,
-      this.updated, 
+      this.updated,
       this.lastUpdate});
 
   factory GlobalResponse.fromJson(Map<String, dynamic> json) {
     final toDateTime = DateTime.fromMillisecondsSinceEpoch(json['updated']);
-    
+
     return GlobalResponse(
-      lastUpdate: DateTime.now(), 
+      lastUpdate: DateTime.now(),
       updated: toDateTime,
       cases: json['cases'],
       deaths: json['deaths'],
@@ -96,8 +96,9 @@ class VaccineDataResponse {
   final List<String> dates;
   final List<int> doses;
   final List<int> perDay;
+  final String eta;
 
-  VaccineDataResponse({this.dates, this.doses, this.perDay});
+  VaccineDataResponse({this.dates, this.doses, this.perDay, this.eta});
 
   factory VaccineDataResponse.fromJson(Map<String, dynamic> json) {
     Map<String, int> timeMap =
@@ -110,10 +111,19 @@ class VaccineDataResponse {
     for (int i = 0; i < cdoses.length - 1; ++i) {
       daily.add(cdoses[i + 1] - cdoses[i]); //one less than dates' list
     }
-    daily = daily.sublist(0, daily.length - 1);
+    daily = daily.sublist(0, daily.length);
     //print("Daily: ${daily.length}");
-    cdates = cdates.sublist(1, cdates.length - 1); //keep equal length
-    return VaccineDataResponse(dates: cdates, doses: cdoses, perDay: daily);
+    cdates = cdates.sublist(1, cdates.length); //keep equal length
+    int sum = 0;
+    final don = cdoses[cdoses.length - 1] * 0.000001;
+    double avg;
+    for (int i = daily.length - 7; i < daily.length; ++i) {
+      sum += daily[i];
+    }
+    avg = sum / 7 * 0.000001; 
+    final etaVal = (((1400 - don) / avg) / 365).toStringAsFixed(2);
+    return VaccineDataResponse(
+        dates: cdates, doses: cdoses, perDay: daily, eta: etaVal);
   }
 }
 
@@ -130,7 +140,7 @@ class TestingData {
     passList = passList.sublist(passList.length - 30, passList.length);
 
     List<int> tests = [];
-    for (int i = 0; i < passList.length - 2; ++i) {
+    for (int i = 0; i < passList.length - 1; ++i) {
       tests.add(passList[i + 1].value.samples - passList[i].value.samples);
     }
     //return 29 days of data
