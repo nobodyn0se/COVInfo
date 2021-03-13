@@ -56,31 +56,32 @@ class CountriesPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          fontFamily: 'Courier',
-                          fontSize: ScreenSize.safeHeight * 2,
-                          fontWeight: FontWeight.w900,
+                    Padding(
+                      padding: EdgeInsets.only(right: ScreenSize.safeWidth*1),
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontFamily: 'Courier',
+                            fontSize: ScreenSize.safeHeight * 2,
+                            fontWeight: FontWeight.w900,
+                          ),
+                          children: [
+                            TextSpan(
+                                text: 'C: ${uid.cases}\n',
+                                style: TextStyle(color: Colors.blue[800])),
+                            TextSpan(
+                              text: 'D: ${uid.deaths}\n',
+                              style: TextStyle(color: Colors.red[800]),
+                            ),
+                            TextSpan(
+                              text: 'R: ${uid.recovered}',
+                              style: TextStyle(color: Colors.lightGreen[800]),
+                            ),
+                          ],
                         ),
-                        children: [
-                          TextSpan(
-                              text: 'C: ${uid.cases}\n',
-                              style: TextStyle(color: Colors.blue[800])),
-                          TextSpan(
-                            text: 'D: ${uid.deaths}\n',
-                            style: TextStyle(color: Colors.red[800]),
-                          ),
-                          TextSpan(
-                            text: 'R: ${uid.recovered}',
-                            style: TextStyle(color: Colors.lightGreen[800]),
-                          ),
-                        ],
                       ),
                     ),
-                    // Text('C: ${uid.cases}\n'
-                    //     'D: ${uid.deaths}\n'
-                    //     'R: ${uid.recovered}'),
+          
                   ], //outer children
                 ),
               );

@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
-import 'package:ncov_visual/provider/coreClass.dart';
 import 'package:ncov_visual/screen_size.dart';
 import 'package:provider/provider.dart';
 
-class IndiaPage extends StatefulWidget {
-  @override
-  IndiaPageState createState() => IndiaPageState();
-}
-
-class IndiaPageState extends State<IndiaPage> {
-  @override
-  void initState() {
-    print("India Page Initialized\n");
-    super.initState();
-  }
+class IndiaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +28,9 @@ class IndiaPageState extends State<IndiaPage> {
                   padding: EdgeInsets.only(right: ScreenSize.safeWidth * 2),
                   child: Text(
                     'Updated at ' +
-                        retUpdated(glob.globalData.lastUpdate.hour) +
+                        glob.globalData.lastHour +
                         ':' +
-                        retUpdated(glob.globalData.lastUpdate.minute),
+                        glob.globalData.lastMinute,
                     textAlign: TextAlign.end,
                   ),
                 ),

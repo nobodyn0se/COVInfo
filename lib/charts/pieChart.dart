@@ -35,86 +35,115 @@ class GlobalPieChart extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 2.5, //width to height ratio
       child: Card(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 2,
-                child: PieChart(
-                  PieChartData(
-                      centerSpaceColor: Colors.transparent,
-                      borderData: FlBorderData(
-                        show: false,
+        elevation: ScreenSize.safeHeight * 1,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenSize.safeWidth * 2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1.3,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      PieChart(
+                        PieChartData(
+                            startDegreeOffset: 270,
+                            centerSpaceColor: Colors.transparent,
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
+                            sectionsSpace: 0,
+                            centerSpaceRadius: ScreenSize.safeHeight * 6,
+                            sections: showingSections()),
                       ),
-                      sectionsSpace: 0,
-                      centerSpaceRadius: 40,
-                      sections: showingSections()),
+                      Text(
+                        'Total\n${(chartObjects[3] * 0.000001).toStringAsFixed(2)}M',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: ScreenSize.safeHeight * 1.9,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.amber,
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                        width: ScreenSize.safeHeight * 2,
+                        height: ScreenSize.safeHeight * 2,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black,
+                              width: ScreenSize.safeWidth * 0.3),
+                          shape: BoxShape.circle,
+                          color: Colors.amber,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: ScreenSize.safeWidth * 1,
-                    ),
-                    Text('Active'),
-                  ],
-                ),
-                SizedBox(
-                  height: ScreenSize.safeHeight * 1,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.red,
+                      SizedBox(
+                        width: ScreenSize.safeWidth * 1,
                       ),
-                    ),
-                    SizedBox(
-                      width: ScreenSize.safeWidth * 1,
-                    ),
-                    Text('Deaths'),
-                  ],
-                ),
-                SizedBox(
-                  height: ScreenSize.safeHeight * 1,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
+                      Text(
+                          'Active: ${(chartObjects[0] * 0.000001).toStringAsFixed(2)}M'),
+                    ],
+                  ),
+                  SizedBox(
+                    height: ScreenSize.safeHeight * 1,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: ScreenSize.safeHeight * 2, //1 unit is 7
+                        height: ScreenSize.safeHeight * 2,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black,
+                              width: ScreenSize.safeWidth * 0.3),
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: ScreenSize.safeWidth * 1,
-                    ),
-                    Text('Recovered'),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                      SizedBox(
+                        width: ScreenSize.safeWidth * 1,
+                      ),
+                      Text(
+                          'Deaths: ${(chartObjects[1] * 0.000001).toStringAsFixed(2)}M'),
+                    ],
+                  ),
+                  SizedBox(
+                    height: ScreenSize.safeHeight * 1,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: ScreenSize.safeHeight * 2,
+                        height: ScreenSize.safeHeight * 2,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black,
+                              width: ScreenSize.safeWidth * 0.3),
+                          shape: BoxShape.circle,
+                          color: Colors.green,
+                        ),
+                      ),
+                      SizedBox(
+                        width: ScreenSize.safeWidth * 1,
+                      ),
+                      Text(
+                          'Recovered: ${(chartObjects[2] * 0.000001).toStringAsFixed(2)}M'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

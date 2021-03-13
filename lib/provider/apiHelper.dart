@@ -86,8 +86,3 @@ class CountriesResponseHelper extends ChangeNotifier {
 }
 
 //three async calls cause stack overflow
-
-String retUpdated(int timeVal) {
-  if (timeVal < 10) return '0' + timeVal.toString(); 
-  else return timeVal.toString(); 
-}

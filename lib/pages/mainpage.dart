@@ -32,7 +32,7 @@ class MainPage extends StatelessWidget {
               children: [
                 Container(
                   color: Colors.grey[50],
-                  margin: EdgeInsets.only(bottom: ScreenSize.safeHeight * 2),
+                  //margin: EdgeInsets.only(bottom: ScreenSize.safeHeight * 1),
                   //elevation: ScreenSize.safeHeight * 1,
                   padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
                   child: DisplayGlobalData(prov: prov),
@@ -95,39 +95,37 @@ class DisplayGlobalData extends StatelessWidget {
         Container(
           //color: Colors.grey[50],
           width: ScreenSize.safeWidth * 50,
-          margin: EdgeInsets.fromLTRB(
-              ScreenSize.safeWidth * 50, 0, 0, ScreenSize.safeHeight * 1),
+          margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
           padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
           child: Text(
             'Updated at ' +
-                retUpdated(prov.globalData.lastUpdate.hour) +
+                prov.globalData.lastHour +
                 ':' +
-                retUpdated(prov.globalData.lastUpdate.minute),
+                prov.globalData.lastMinute,
             textAlign: TextAlign.end,
           ),
         ),
-        // Text('Total Cases ${prov.globalData.cases}',
-        //     style: TextStyle(fontSize: ScreenSize.safeWidth * 4.5)),
-        // SizedBox(height: ScreenSize.safeHeight * 1.5),
-        // Text(
-        //   'Active ${prov.globalData.active}\n'
-        //   'Deaths ${prov.globalData.deaths}\n'
-        //   'Recoveries ${prov.globalData.recovered}',
-        //   style: TextStyle(fontSize: ScreenSize.safeWidth * 4),
-        // ),
-        // SizedBox(
-        //   height: ScreenSize.safeHeight * 1.5,
-        // ),
         GlobalPieChart(
           chartObjects: [
             prov.globalData.active,
             prov.globalData.deaths,
             prov.globalData.recovered,
+            prov.globalData.cases,
           ],
         ),
-        Text(
-            'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
-            'Recovery Rate: ${(prov.globalData.recovered / prov.globalData.cases * 100).toStringAsFixed(2)}%'),
+        Card(
+          elevation: ScreenSize.safeWidth*1,
+          margin: EdgeInsets.all(ScreenSize.safeHeight*1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(ScreenSize.safeWidth*2)
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(ScreenSize.safeWidth*2),
+            child: Text(
+                'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
+                'Recovery Rate: ${(prov.globalData.recovered / prov.globalData.cases * 100).toStringAsFixed(2)}%'),
+          ),
+        ),
       ],
     );
   }

@@ -13,7 +13,7 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-  bool asdad = false; 
+  bool asdad = false;
   GlobalResponseHelper provGlo;
   CountriesResponseHelper provCount;
 
@@ -50,7 +50,12 @@ class _InitPageState extends State<InitPage> {
   void initState() {
     print("Init State initialized\n");
     asdad = true;
-    //.then((_) => prov.fetchDataCountries());
+    provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
+    provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
+
+    Future.delayed(Duration.zero, () {
+      provGlo.getDataGlobal(context);
+    }).whenComplete(() => provCount.getDataCountries(context));
     super.initState();
   }
 
@@ -58,12 +63,6 @@ class _InitPageState extends State<InitPage> {
   void didChangeDependencies() {
     if (asdad) {
       ScreenSize().init(context);
-      provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
-      provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
-
-      Future.delayed(Duration.zero, () {
-        provGlo.getDataGlobal(context);
-      }).then((_) => provCount.getDataCountries(context));
       asdad = !asdad;
     }
     super.didChangeDependencies();
@@ -95,8 +94,7 @@ class _InitPageState extends State<InitPage> {
         elevation: ScreenSize.safeWidth * 2,
       ),
 
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
 
       bottomNavigationBar: CurvedNavigationBar(
         color: _tabs[initIndex]['bgcolor'],

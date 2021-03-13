@@ -4,8 +4,8 @@ class GlobalResponse {
   final int recovered;
   final int active;
   final int affectedCountries;
-  final DateTime updated;
-  final DateTime lastUpdate;
+  final String lastHour;
+  final String lastMinute;
 
   GlobalResponse(
       {this.cases,
@@ -13,15 +13,27 @@ class GlobalResponse {
       this.recovered,
       this.active,
       this.affectedCountries,
-      this.updated,
-      this.lastUpdate});
+      this.lastHour,
+      this.lastMinute});
 
   factory GlobalResponse.fromJson(Map<String, dynamic> json) {
-    final toDateTime = DateTime.fromMillisecondsSinceEpoch(json['updated']);
+    final rightNow = DateTime.now();
+    String hh, mm;
+    if (rightNow.hour < 10) {
+      hh = '0' + rightNow.hour.toString();
+    } else {
+      hh = rightNow.hour.toString();
+    }
+
+    if (rightNow.minute < 10) {
+      mm = '0' + rightNow.minute.toString();
+    } else {
+      mm = rightNow.minute.toString(); 
+    }
 
     return GlobalResponse(
-      lastUpdate: DateTime.now(),
-      updated: toDateTime,
+      lastHour: hh,
+      lastMinute: mm,
       cases: json['cases'],
       deaths: json['deaths'],
       recovered: json['recovered'],
@@ -120,7 +132,7 @@ class VaccineDataResponse {
     for (int i = daily.length - 7; i < daily.length; ++i) {
       sum += daily[i];
     }
-    avg = sum / 7 * 0.000001; 
+    avg = sum / 7 * 0.000001;
     final etaVal = (((1400 - don) / avg) / 365).toStringAsFixed(2);
     return VaccineDataResponse(
         dates: cdates, doses: cdoses, perDay: daily, eta: etaVal);
