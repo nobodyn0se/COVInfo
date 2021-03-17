@@ -23,12 +23,11 @@ class TopListViewDeaths extends StatelessWidget {
         SizedBox(
           //always give bounded height to a listview to prevent draw errors
           height: ScreenSize.safeHeight * 27, //takes 30% of the screen
-          width: ScreenSize.safeWidth * 45,
+          width: ScreenSize.safeWidth * 48,
           child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, id) {
                 return Card(
-                  color: Colors.grey[200],
                   child: Row(
                     //outer row, spacebetween
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +35,11 @@ class TopListViewDeaths extends StatelessWidget {
                         CrossAxisAlignment.center, //middle of the card
                     children: [
                       buildLeadingRow(id, prov.topDed),
-                      Text('+${prov.topDed[id].todayDeaths}'),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: ScreenSize.safeWidth * 1),
+                        child: Text('+${prov.topDed[id].todayDeaths}'),
+                      ),
                     ],
                   ),
                 );

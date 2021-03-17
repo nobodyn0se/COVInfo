@@ -13,7 +13,8 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-  bool asdad = false;
+  bool _initWidget = false;
+  bool _buffer = true;
   GlobalResponseHelper provGlo;
   CountriesResponseHelper provCount;
 
@@ -49,21 +50,31 @@ class _InitPageState extends State<InitPage> {
   @override
   void initState() {
     print("Init State initialized\n");
-    asdad = true;
-    provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
-    provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
-
-    Future.delayed(Duration.zero, () {
-      provGlo.getDataGlobal(context);
-    }).whenComplete(() => provCount.getDataCountries(context));
+    _initWidget = true;
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    if (asdad) {
+    if (_initWidget) {
+      setState(() {
+        _buffer = true;
+      });
+      
       ScreenSize().init(context);
-      asdad = !asdad;
+      provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
+      provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
+
+      Future.delayed(Duration.zero, () {
+        provGlo.getDataGlobal(context);
+      }).then((_) {
+        provCount.getDataCountries(context);
+      }).whenComplete(() {
+        setState(() {
+          _buffer = false;
+        });
+      });
+      _initWidget = !_initWidget;
     }
     super.didChangeDependencies();
   }
@@ -71,23 +82,39 @@ class _InitPageState extends State<InitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text(_tabs[initIndex]['title']),
         backgroundColor: _tabs[initIndex]['bgcolor'],
       ),
-      body: IndexedStack(
-        index: initIndex,
-        children: [
-          ..._tabs.map((e) => e['page']).toList()
-        ], //retain state and create list of widgets
-      ),
+      body: _buffer
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : IndexedStack(
+              index: initIndex,
+              children: [
+                ..._tabs.map((e) => e['page']).toList()
+              ], //retain state and create list of widgets
+            ),
       //_tabs[initIndex]['page'],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<GlobalResponseHelper>(context, listen: false)
-              .getDataGlobal(context);
-          Provider.of<CountriesResponseHelper>(context, listen: false)
-              .getDataCountries(context);
+          setState(() {
+            _buffer = true;
+          });
+          Future.delayed(Duration.zero, () {
+            Provider.of<GlobalResponseHelper>(context, listen: false)
+                .getDataGlobal(context);
+          })
+              .then((_) =>
+                  Provider.of<CountriesResponseHelper>(context, listen: false)
+                      .getDataCountries(context))
+              .whenComplete(() {
+            setState(() {
+              _buffer = false;
+            });
+          });
         }, //onPressed needs a void, prov returns a Future
         backgroundColor: Colors.green[700],
         child: Icon(Icons.refresh),
@@ -98,9 +125,9 @@ class _InitPageState extends State<InitPage> {
 
       bottomNavigationBar: CurvedNavigationBar(
         color: _tabs[initIndex]['bgcolor'],
-        backgroundColor: Colors.grey[50], //Scaffold color
+        backgroundColor: Colors.transparent,
         buttonBackgroundColor: _tabs[initIndex]['bgcolor'],
-        height: ScreenSize.blockHeight * 6.4, //8%
+        height: ScreenSize.blockHeight * 6.2, //8%
         index: initIndex, //sets the initial index for BottomNavigationBar
         onTap: (int index) {
           //changes both BNB index and PageIndex referenced from <List> _screen

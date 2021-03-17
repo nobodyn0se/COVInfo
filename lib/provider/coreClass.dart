@@ -20,15 +20,15 @@ class GlobalResponse {
     final rightNow = DateTime.now();
     String hh, mm;
     if (rightNow.hour < 10) {
-      hh = '0' + rightNow.hour.toString();
+      hh = '0${rightNow.hour}';
     } else {
       hh = rightNow.hour.toString();
     }
 
     if (rightNow.minute < 10) {
-      mm = '0' + rightNow.minute.toString();
+      mm = '0${rightNow.minute}';
     } else {
-      mm = rightNow.minute.toString(); 
+      mm = rightNow.minute.toString();
     }
 
     return GlobalResponse(

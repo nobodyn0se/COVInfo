@@ -57,7 +57,7 @@ class GlobalResponseHelper extends ChangeNotifier {
 
     bufferStatus = false;
 
-    obj.clear();
+    //obj.clear();
 
     notifyListeners();
   }
@@ -80,7 +80,7 @@ class CountriesResponseHelper extends ChangeNotifier {
     testObj = recObj[2];
     bufferStatus = false;
 
-    recObj.clear();
+    //recObj.clear();
     notifyListeners();
   }
 }

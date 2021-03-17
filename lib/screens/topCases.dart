@@ -22,12 +22,11 @@ class TopListViewCases extends StatelessWidget {
         ),
         SizedBox(
           height: ScreenSize.safeHeight * 27,
-          width: ScreenSize.safeWidth * 45,
+          width: ScreenSize.safeWidth * 48,
           child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, id) {
                 return Card(
-                  color: Colors.grey[200],
                   child: Row(
                     //outer row, spacebetween
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +34,11 @@ class TopListViewCases extends StatelessWidget {
                         .center, //middle of the card laterally
                     children: [
                       buildLeadingRow(id, prov.topCas),
-                      Text('+${prov.topCas[id].todayCases}'),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: ScreenSize.safeWidth * 1),
+                        child: Text('+${prov.topCas[id].todayCases}'),
+                      ),
                     ],
                   ),
                 );

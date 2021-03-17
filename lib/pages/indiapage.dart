@@ -4,13 +4,12 @@ import 'package:ncov_visual/screen_size.dart';
 import 'package:provider/provider.dart';
 
 class IndiaPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
     final glob = Provider.of<GlobalResponseHelper>(context);
-    
-    return (prov.bufferStatus && glob.bufferStatus)
+
+    return glob.bufferStatus && prov.bufferStatus
         ? Center(
             child: CircularProgressIndicator(),
           )
@@ -27,10 +26,7 @@ class IndiaPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
                   padding: EdgeInsets.only(right: ScreenSize.safeWidth * 2),
                   child: Text(
-                    'Updated at ' +
-                        glob.globalData.lastHour +
-                        ':' +
-                        glob.globalData.lastMinute,
+                    'Updated at ${glob.globalData.lastHour}:${glob.globalData.lastMinute}', //do not use String interpolation here
                     textAlign: TextAlign.end,
                   ),
                 ),
@@ -43,7 +39,8 @@ class IndiaPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Data upto: ${prov.vaccData.dates[prov.vaccData.dates.length - 1]}\n'),
+                        Text(
+                            'Data upto: ${prov.vaccData.dates[prov.vaccData.dates.length - 1]}\n'),
                         Text(
                             'Total Vaccinations: ${prov.vaccData.doses[prov.vaccData.doses.length - 1]}'),
                         Text(

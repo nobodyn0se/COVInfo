@@ -8,12 +8,29 @@ class CountriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
     //print(prov.obj.length);
-    return (prov.bufferStatus)
+    return prov.bufferStatus
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : ListView.builder(
-            //padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
+        : //Column(
+        //     children: [
+        //       Padding(
+        //         padding: EdgeInsets.only(top: ScreenSize.safeHeight*1),
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //           children: [
+        //             Text('A'),
+        //             Text('C'),
+        //             Text('D'),
+        //             Text('R')
+        //           ],
+        //         ),
+        //       ),
+        //       Expanded(
+        //         child:
+        ListView.builder(
+            padding:
+                EdgeInsets.symmetric(vertical: ScreenSize.safeHeight * 0.5),
             itemCount: prov.countriesList.length,
             itemBuilder: (context, id) {
               var uid = prov.countriesList[id];
@@ -57,7 +74,7 @@ class CountriesPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: ScreenSize.safeWidth*1),
+                      padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
                       child: RichText(
                         text: TextSpan(
                           style: TextStyle(
@@ -81,7 +98,6 @@ class CountriesPage extends StatelessWidget {
                         ),
                       ),
                     ),
-          
                   ], //outer children
                 ),
               );
@@ -124,6 +140,8 @@ String netActive(int newCases, int newRec) {
 
   if (net == 0)
     return '';
-  else if (net > 0) return '(+$net)'; 
-  else return '(-$net)'; 
+  else if (net > 0)
+    return '(+$net)';
+  else
+    return '(-$net)';
 }

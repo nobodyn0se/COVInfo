@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final prov = Provider.of<GlobalResponseHelper>(context);
 
-    return (prov.bufferStatus)
+    return prov.bufferStatus
         ? Center(
             child: CircularProgressIndicator(),
           )
@@ -31,7 +31,6 @@ class MainPage extends StatelessWidget {
               //Outer column, overall page
               children: [
                 Container(
-                  color: Colors.grey[50],
                   //margin: EdgeInsets.only(bottom: ScreenSize.safeHeight * 1),
                   //elevation: ScreenSize.safeHeight * 1,
                   padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
@@ -114,7 +113,7 @@ class DisplayGlobalData extends StatelessWidget {
           ],
         ),
         Card(
-          elevation: ScreenSize.safeWidth*1,
+          elevation: ScreenSize.safeHeight*1,
           margin: EdgeInsets.all(ScreenSize.safeHeight*1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(ScreenSize.safeWidth*2)
