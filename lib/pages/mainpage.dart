@@ -92,7 +92,7 @@ class DisplayGlobalData extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Container(
-          //color: Colors.grey[50],
+          //color: Colors.grey[100],
           width: ScreenSize.safeWidth * 50,
           margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
           padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),

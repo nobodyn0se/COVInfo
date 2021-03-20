@@ -4,6 +4,9 @@ import 'package:ncov_visual/screen_size.dart';
 import 'package:provider/provider.dart';
 
 class IndiaPage extends StatelessWidget {
+   final List months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; 
+    
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
@@ -50,11 +53,12 @@ class IndiaPage extends StatelessWidget {
                         Text('Tested in 24h: '
                             '${dailyDoses(prov.testObj.dailytests[prov.testObj.dailytests.length - 2], prov.testObj.dailytests[prov.testObj.dailytests.length - 1])}\n'),
                         Text('ETA at current rate: ${prov.vaccData.eta} years'),
+                        Text(
+                            'Reaching 20% target by ${months[prov.vaccData.eta20pct.month-1]} ${prov.vaccData.eta20pct.day}'),
                       ],
                     ),
                   ),
                 ),
-                //Text('Testing list length: ${prov.testObj.rows.length}'),
                 SizedBox(
                   width: ScreenSize.safeWidth * 90,
                   child: Row(

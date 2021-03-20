@@ -29,7 +29,7 @@ class _InitPageState extends State<InitPage> {
       'page': MainPage(),
       'icon_color': Colors.lightBlue[200],
       'bgcolor': Colors.lightBlue[900],
-      'title': 'Worldwide Statistics'
+      'title': 'Global Statistics'
     },
     {
       'page': IndiaPage(),
@@ -82,7 +82,7 @@ class _InitPageState extends State<InitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text(_tabs[initIndex]['title']),
         backgroundColor: _tabs[initIndex]['bgcolor'],
@@ -97,7 +97,6 @@ class _InitPageState extends State<InitPage> {
                 ..._tabs.map((e) => e['page']).toList()
               ], //retain state and create list of widgets
             ),
-      //_tabs[initIndex]['page'],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
