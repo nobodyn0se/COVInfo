@@ -140,7 +140,7 @@ class VaccineDataResponse {
     final eta20 = DateTime.now().add(Duration(days: days20));
     //ETA for 20% population coverage
     return VaccineDataResponse(
-        dates: cdates,
+        dates: cdates ?? 0,
         doses: cdoses,
         perDay: daily,
         eta: etaVal,
