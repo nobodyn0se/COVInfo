@@ -124,9 +124,9 @@ class _InitPageState extends State<InitPage> {
 
       bottomNavigationBar: CurvedNavigationBar(
         color: _tabs[initIndex]['bgcolor'],
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.grey[200],  //widget coloring bug when transparent
         buttonBackgroundColor: _tabs[initIndex]['bgcolor'],
-        height: ScreenSize.blockHeight * 6.2, //8%
+        height: ScreenSize.blockHeight * 6.2, //6.2%
         index: initIndex, //sets the initial index for BottomNavigationBar
         onTap: (int index) {
           //changes both BNB index and PageIndex referenced from <List> _screen

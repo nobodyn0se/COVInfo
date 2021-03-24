@@ -4,6 +4,9 @@ class GlobalResponse {
   final int recovered;
   final int active;
   final int affectedCountries;
+  final int todayGCases;
+  final int todayGDeaths;
+  final int todayGRecovered;
   final String lastHour;
   final String lastMinute;
 
@@ -14,7 +17,10 @@ class GlobalResponse {
       this.active,
       this.affectedCountries,
       this.lastHour,
-      this.lastMinute});
+      this.lastMinute,
+      this.todayGCases,
+      this.todayGDeaths,
+      this.todayGRecovered});
 
   factory GlobalResponse.fromJson(Map<String, dynamic> json) {
     final rightNow = DateTime.now();
@@ -39,6 +45,9 @@ class GlobalResponse {
       recovered: json['recovered'],
       active: json['active'],
       affectedCountries: json['affectedCountries'],
+      todayGCases: json['todayCases'],
+      todayGDeaths: json['todayDeaths'],
+      todayGRecovered: json['todayRecovered'],
     );
   }
 
@@ -143,7 +152,7 @@ class VaccineDataResponse {
     final eta20 = DateTime.now().add(Duration(days: days20));
     //ETA for 20% population coverage
     return VaccineDataResponse(
-        dates: cdates ?? 0,
+        dates: cdates ?? cdates,
         doses: cdoses,
         perDay: daily,
         eta: etaVal,

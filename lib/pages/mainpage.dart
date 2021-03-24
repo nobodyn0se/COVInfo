@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<GlobalResponseHelper>(context);
-    final count = Provider.of<CountriesResponseHelper>(context); 
+    final count = Provider.of<CountriesResponseHelper>(context);
 
     return prov.bufferStatus
         ? Center(
@@ -37,6 +37,57 @@ class MainPage extends StatelessWidget {
                   //elevation: ScreenSize.safeHeight * 1,
                   padding: EdgeInsets.all(ScreenSize.safeHeight * 1),
                   child: DisplayGlobalData(prov: prov),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: ScreenSize.safeWidth * 1.5),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: ScreenSize.safeWidth*2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: Card(
+                            elevation: ScreenSize.safeWidth * 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
+                            ),
+                            child: Text(
+                              'Cases\n+${prov.globalData.todayGCases}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Card(
+                            elevation: ScreenSize.safeWidth * 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
+                            ),
+                            child: Text(
+                              'Deaths\n+${prov.globalData.todayGDeaths}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Card(
+                            elevation: ScreenSize.safeWidth * 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
+                            ),
+                            child: Text(
+                              'Recoveries\n+${prov.globalData.todayGRecovered}',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -114,7 +165,7 @@ class DisplayGlobalData extends StatelessWidget {
         ),
         Card(
           elevation: ScreenSize.safeHeight * 1,
-          margin: EdgeInsets.all(ScreenSize.safeHeight * 1),
+          margin: EdgeInsets.only(top: ScreenSize.safeHeight * 1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(ScreenSize.safeWidth * 2)),
           child: Padding(
