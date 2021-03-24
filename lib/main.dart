@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
 import 'package:ncov_visual/pages/initpage.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
