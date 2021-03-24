@@ -109,23 +109,26 @@ class VaccineDataResponse {
   final List<int> doses;
   final List<int> perDay;
   final String eta;
-  final DateTime eta20pct; 
+  final DateTime eta20pct;
 
-  VaccineDataResponse({this.dates, this.doses, this.perDay, this.eta, this.eta20pct});
+  VaccineDataResponse(
+      {this.dates, this.doses, this.perDay, this.eta, this.eta20pct});
 
   factory VaccineDataResponse.fromJson(Map<String, dynamic> json) {
     Map<String, int> timeMap =
         Map.from(json["timeline"]).map((k, v) => MapEntry<String, int>(k, v));
 
     List<String> cdates = timeMap.keys.toList();
-    List<int> cdoses = timeMap.values.toList(); //red
+    List<int> cdoses = timeMap.values.toList(); //reduce
     List<int> daily = [];
 
     for (int i = 0; i < cdoses.length - 1; ++i) {
       daily.add(cdoses[i + 1] - cdoses[i]); //one less than dates' list
     }
+
     daily = daily.sublist(0, daily.length);
     cdates = cdates.sublist(1, cdates.length); //keep equal length
+
     int sum = 0;
     final don = cdoses[cdoses.length - 1] * 0.000001;
     double avg;
@@ -190,5 +193,21 @@ class Val {
 
   factory Val.fromJson(Map<String, dynamic> json) {
     return Val(samples: json["samples"]);
+  }
+}
+
+//Top 5 Vaccine List
+class TopVaccineList {
+  final String country;
+  final Map<String, int> timeline;
+
+  TopVaccineList({this.country, this.timeline});
+
+  factory TopVaccineList.fromJson(Map<String, dynamic> json) {
+    return TopVaccineList(
+      country: json['country'],
+      timeline:
+          Map.from(json['timeline']).map((k, v) => MapEntry<String, int>(k, v)),
+    );
   }
 }

@@ -32,7 +32,7 @@ class HighListViewCases extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.center, //middle of the card
                     children: [
-                      buildLeadingRow(id, prov.hCases),
+                      buildLeadingRow(id, prov.hCases), //in mainpage.dart
                       Padding(
                         padding: EdgeInsets.all(ScreenSize.safeWidth*1),
                         child: Text('${prov.hCases[id].cases}'),

@@ -16,6 +16,9 @@ class GlobalResponseHelper extends ChangeNotifier {
   List<CountriesResponse> hRecover = List<CountriesResponse>();
   List<CountriesResponse> hTests = List<CountriesResponse>();
 
+  List<TopVaccineList> topVaccList = List<TopVaccineList>();
+  List<Map<String, dynamic>> newVaccList = [];
+
   bool bufferStatus = true;
 
   getDataGlobal(context) async {
@@ -55,9 +58,21 @@ class GlobalResponseHelper extends ChangeNotifier {
     hTests.sort((a, b) => b.tests.compareTo(a.tests));
     this.hTests = hTests.sublist(0, 5);
 
+    topVaccList = obj[2];
+
+    topVaccList.forEach((element) {
+      newVaccList.add({
+        "country": element.country,
+        "value": element.timeline.values.single
+      });
+    });
+
+    newVaccList.sort((k1, k2) => k2["value"].compareTo(k1["value"]));
+    newVaccList = newVaccList.sublist(0, 5);
+
     bufferStatus = false;
 
-    obj.clear();
+    obj = null;
 
     notifyListeners();
   }
@@ -80,7 +95,7 @@ class CountriesResponseHelper extends ChangeNotifier {
     testObj = recObj[2];
     bufferStatus = false;
 
-    recObj.clear();
+    recObj = null;
     notifyListeners();
   }
 }

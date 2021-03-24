@@ -4,6 +4,7 @@ import 'package:ncov_visual/provider/apiHelper.dart';
 import 'package:ncov_visual/provider/coreClass.dart';
 import 'package:ncov_visual/screens/highestRecv.dart';
 import 'package:ncov_visual/screens/highestTests.dart';
+import 'package:ncov_visual/screens/highestVaccines.dart';
 import 'package:ncov_visual/screens/topActive.dart';
 import 'package:ncov_visual/screens/topCases.dart';
 import 'package:ncov_visual/screens/topDeaths.dart';
@@ -17,6 +18,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<GlobalResponseHelper>(context);
+    final count = Provider.of<CountriesResponseHelper>(context); 
 
     return prov.bufferStatus
         ? Center(
@@ -69,9 +71,7 @@ class MainPage extends StatelessWidget {
                     HighListViewTests(prov: prov),
                   ],
                 ),
-                Container(
-                  height: ScreenSize.safeHeight * 10,
-                ),
+                HighListViewVaccines(prov: prov, count: count),
               ],
             ),
           );
@@ -113,13 +113,12 @@ class DisplayGlobalData extends StatelessWidget {
           ],
         ),
         Card(
-          elevation: ScreenSize.safeHeight*1,
-          margin: EdgeInsets.all(ScreenSize.safeHeight*1),
+          elevation: ScreenSize.safeHeight * 1,
+          margin: EdgeInsets.all(ScreenSize.safeHeight * 1),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(ScreenSize.safeWidth*2)
-          ),
+              borderRadius: BorderRadius.circular(ScreenSize.safeWidth * 2)),
           child: Padding(
-            padding: EdgeInsets.all(ScreenSize.safeWidth*2),
+            padding: EdgeInsets.all(ScreenSize.safeWidth * 2),
             child: Text(
                 'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
                 'Recovery Rate: ${(prov.globalData.recovered / prov.globalData.cases * 100).toStringAsFixed(2)}%'),
