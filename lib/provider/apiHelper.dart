@@ -3,22 +3,22 @@ import './data.dart';
 import 'package:flutter/cupertino.dart';
 
 class GlobalResponseHelper extends ChangeNotifier {
-  List<dynamic> obj = List<dynamic>();
+  List<dynamic> obj = [];
   GlobalResponse globalData = GlobalResponse();
 
-  List<CountriesResponse> topRec = List<CountriesResponse>();
-  List<CountriesResponse> topDed = List<CountriesResponse>();
-  List<CountriesResponse> topCas = List<CountriesResponse>();
-  List<CountriesResponse> topAct = List<CountriesResponse>();
+  List<CountriesResponse> topRec = [];
+  List<CountriesResponse> topDed = [];
+  List<CountriesResponse> topCas = [];
+  List<CountriesResponse> topAct = [];
 
-  List<CountriesResponse> hDeaths = List<CountriesResponse>();
-  List<CountriesResponse> hCases = List<CountriesResponse>();
-  List<CountriesResponse> hRecover = List<CountriesResponse>();
-  List<CountriesResponse> hTests = List<CountriesResponse>();
+  List<CountriesResponse> hDeaths = [];
+  List<CountriesResponse> hCases = [];
+  List<CountriesResponse> hRecover = [];
+  List<CountriesResponse> hTests = [];
 
-  List<TopVaccineList> topVaccList = List<TopVaccineList>();
+  List<TopVaccineList> topVaccList = [];
   List<Map<String, dynamic>> newVaccList = [];
-  List<TopVaccineList> dailyVaccList = List<TopVaccineList>();
+  List<TopVaccineList> dailyVaccList = [];
 
   bool bufferStatus = true;
 
@@ -95,9 +95,8 @@ class GlobalResponseHelper extends ChangeNotifier {
 
 class CountriesResponseHelper extends ChangeNotifier {
   VaccineDataResponse vaccData = VaccineDataResponse();
-  List<dynamic> recObj = List<dynamic>();
-  List<CountriesResponse> countriesList =
-      List<CountriesResponse>(); //instantiation is important here
+  List<dynamic> recObj = [];
+  List<CountriesResponse> countriesList = []; //removed deprecated instantiation 
 
   TestingData testObj = TestingData();
   bool bufferStatus = true;
