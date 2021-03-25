@@ -11,7 +11,7 @@ Future<List<dynamic>> fetchDataGlobal(context) async {
   const _url1 = 'https://disease.sh/v3/covid-19/all';
   const _url2 = 'https://disease.sh/v3/covid-19/countries?sort=todayCases';
   const _url3 =
-      'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=1';
+      'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=3';
   //countries vaccine data
 
   try {

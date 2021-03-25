@@ -32,18 +32,19 @@ class GlobalPieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 2.5, //width to height ratio
-      child: Card(
+    return Card(
         elevation: ScreenSize.safeHeight * 1,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: ScreenSize.safeWidth * 2),
-          child: Row(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
                 child: AspectRatio(
-                  aspectRatio: 1.3,
+                    aspectRatio: 1.6,
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
@@ -55,7 +56,7 @@ class GlobalPieChart extends StatelessWidget {
                               show: false,
                             ),
                             sectionsSpace: 0,
-                            centerSpaceRadius: ScreenSize.safeHeight * 6,
+                              centerSpaceRadius: ScreenSize.safeHeight * 5.5,
                             sections: showingSections()),
                       ),
                       Text(
@@ -144,6 +145,17 @@ class GlobalPieChart extends StatelessWidget {
               ),
             ],
           ),
+            Divider(
+              color: Colors.black38,
+              indent: ScreenSize.safeWidth*2,
+              endIndent: ScreenSize.safeWidth*2,
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: ScreenSize.safeWidth*1),
+              child: Text('Case Fatality Rate: ${(chartObjects[1]/chartObjects[3] * 100).toStringAsFixed(2)}%\n'
+              'Recovery Rate: ${(chartObjects[2]/chartObjects[3] * 100).toStringAsFixed(2)}%'),
+            ),
+          ],
         ),
       ),
     );

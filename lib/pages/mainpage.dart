@@ -8,6 +8,7 @@ import 'package:ncov_visual/screens/highestVaccines.dart';
 import 'package:ncov_visual/screens/topActive.dart';
 import 'package:ncov_visual/screens/topCases.dart';
 import 'package:ncov_visual/screens/topDeaths.dart';
+import 'package:ncov_visual/screens/topDosageRates.dart';
 import 'package:ncov_visual/screens/topRecv.dart';
 import '../screens/highestCases.dart';
 import '../screens/highestDeaths.dart';
@@ -42,49 +43,14 @@ class MainPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: ScreenSize.safeWidth * 1.5),
                   child: Container(
-                    margin: EdgeInsets.only(bottom: ScreenSize.safeWidth*2),
+                    margin: EdgeInsets.only(bottom: ScreenSize.safeWidth * 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                          child: Card(
-                            elevation: ScreenSize.safeWidth * 1,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
-                            ),
-                            child: Text(
-                              'Cases\n+${prov.globalData.todayGCases}',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Card(
-                            elevation: ScreenSize.safeWidth * 1,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
-                            ),
-                            child: Text(
-                              'Deaths\n+${prov.globalData.todayGDeaths}',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Card(
-                            elevation: ScreenSize.safeWidth * 1,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(ScreenSize.safeWidth * 1),
-                            ),
-                            child: Text(
-                              'Recoveries\n+${prov.globalData.todayGRecovered}',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
+                        expandedTile('Cases', prov.globalData.todayGCases),
+                        expandedTile('Deaths', prov.globalData.todayGDeaths),
+                        expandedTile(
+                            'Recoveries', prov.globalData.todayGRecovered),
                       ],
                     ),
                   ),
@@ -122,7 +88,17 @@ class MainPage extends StatelessWidget {
                     HighListViewTests(prov: prov),
                   ],
                 ),
-                HighListViewVaccines(prov: prov, count: count),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    HighListViewVaccines(prov: prov, count: count),
+                    HighListViewDosagesRates(prov: prov, count: count)
+                  ],
+                ),
+                Container(
+                  height: ScreenSize.safeHeight * 8,
+                ),
               ],
             ),
           );
@@ -146,7 +122,7 @@ class DisplayGlobalData extends StatelessWidget {
           //color: Colors.grey[100],
           width: ScreenSize.safeWidth * 50,
           margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
-          padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
+          //padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
           child: Text(
             'Updated at ' +
                 prov.globalData.lastHour +
@@ -162,18 +138,6 @@ class DisplayGlobalData extends StatelessWidget {
             prov.globalData.recovered,
             prov.globalData.cases,
           ],
-        ),
-        Card(
-          elevation: ScreenSize.safeHeight * 1,
-          margin: EdgeInsets.only(top: ScreenSize.safeHeight * 1),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(ScreenSize.safeWidth * 2)),
-          child: Padding(
-            padding: EdgeInsets.all(ScreenSize.safeWidth * 2),
-            child: Text(
-                'Case Fatality Rate: ${(prov.globalData.deaths / prov.globalData.cases * 100).toStringAsFixed(2)}%\n'
-                'Recovery Rate: ${(prov.globalData.recovered / prov.globalData.cases * 100).toStringAsFixed(2)}%'),
-          ),
         ),
       ],
     );
@@ -206,6 +170,24 @@ Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
           ),
         ),
       ],
+    ),
+  );
+}
+
+Expanded expandedTile(String title, int value) {
+  return Expanded(
+    child: Card(
+      elevation: ScreenSize.safeWidth * 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(ScreenSize.safeWidth * 1),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: ScreenSize.safeHeight * 1),
+        child: Text(
+          '$title\n+$value',
+          textAlign: TextAlign.center,
+        ),
+      ),
     ),
   );
 }

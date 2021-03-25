@@ -18,6 +18,7 @@ class GlobalResponseHelper extends ChangeNotifier {
 
   List<TopVaccineList> topVaccList = List<TopVaccineList>();
   List<Map<String, dynamic>> newVaccList = [];
+  List<TopVaccineList> dailyVaccList = List<TopVaccineList>();
 
   bool bufferStatus = true;
 
@@ -61,10 +62,19 @@ class GlobalResponseHelper extends ChangeNotifier {
     topVaccList = obj[2];
 
     topVaccList.forEach((element) {
-      newVaccList.add({
-        "country": element.country,
-        "value": element.timeline.values.single
-      });
+      newVaccList.add(
+          {"country": element.country, "value": element.timeline.values.last});
+    });
+
+    dailyVaccList = List.from(obj[2]);
+    dailyVaccList.sort((k1, k2) => (k2.timeline.values.elementAt(1) -
+            k2.timeline.values.first)
+        .compareTo(k1.timeline.values.elementAt(1) - k1.timeline.values.first));
+    dailyVaccList = dailyVaccList.sublist(0, 5);
+
+    dailyVaccList.forEach((element) {
+      element.timeline["dailyPace"] =
+          element.timeline.values.elementAt(1) - element.timeline.values.first;
     });
 
     newVaccList.sort((k1, k2) => k2["value"].compareTo(k1["value"]));
@@ -76,6 +86,11 @@ class GlobalResponseHelper extends ChangeNotifier {
 
     notifyListeners();
   }
+  // eraseData(context) async {
+  //   topRec = topCas = topAct = topDed = null;
+  //   hDeaths = hRecover = hCases = hTests = null; 
+
+  // }
 }
 
 class CountriesResponseHelper extends ChangeNotifier {
