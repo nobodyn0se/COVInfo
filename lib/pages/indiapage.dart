@@ -4,9 +4,21 @@ import 'package:ncov_visual/screen_size.dart';
 import 'package:provider/provider.dart';
 
 class IndiaPage extends StatelessWidget {
-   final List months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; 
-    
+  final List months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
@@ -54,7 +66,7 @@ class IndiaPage extends StatelessWidget {
                             '${dailyDoses(prov.testObj.dailytests[prov.testObj.dailytests.length - 2], prov.testObj.dailytests[prov.testObj.dailytests.length - 1])}\n'),
                         Text('ETA at current rate: ${prov.vaccData.eta} years'),
                         Text(
-                            'Reaching 20% target by ${months[prov.vaccData.eta20pct.month-1]} ${prov.vaccData.eta20pct.day}'),
+                            'Reaching 20% target by ${months[prov.vaccData.eta20pct.month - 1]} ${prov.vaccData.eta20pct.day}'),
                       ],
                     ),
                   ),
@@ -155,11 +167,7 @@ class IndiaPage extends StatelessWidget {
           );
   }
 
-  String notZero(int num) {
-    return (num != 0) ? num.toString() : 'TBA';
-  }
+  String notZero(int num) => (num != 0) ? num.toString() : 'TBA';
 
-  int dailyDoses(int num1, int num2) {
-    return (num2 == 0) ? num1 : num2;
-  }
+  int dailyDoses(int num1, int num2) => (num2 == 0) ? num1 : num2;
 }

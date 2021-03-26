@@ -200,9 +200,9 @@ class Val {
 
   Val({this.samples});
 
-  factory Val.fromJson(Map<String, dynamic> json) {
-    return Val(samples: json["samples"]);
-  }
+  factory Val.fromJson(Map<String, dynamic> json) 
+    => Val(samples: json["samples"]);
+  
 }
 
 //Top 5 Vaccine List

@@ -65,7 +65,8 @@ class HighListViewVaccines extends StatelessWidget {
                       Padding(
                         padding:
                             EdgeInsets.only(right: ScreenSize.safeWidth * 1),
-                        child: Text('${prov.topVaccList[id].timeline.values.elementAt(2)}'),
+                        child: Text(
+                            '${prov.topVaccList[id].timeline.values.elementAt(2)}'),
                       ),
                     ],
                   ),
@@ -78,6 +79,5 @@ class HighListViewVaccines extends StatelessWidget {
   }
 }
 
-String flag(List<CountriesResponse> cList, String country) {
-  return cList.firstWhere((element) => element.country == country).flagURL;
-}
+String flag(List<CountriesResponse> cList, String country) =>
+    cList.firstWhere((element) => element.country == country).flagURL;
