@@ -44,7 +44,7 @@ class HighListViewVaccines extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: ScreenSize.safeHeight * 1.8,
                                 backgroundImage: NetworkImage(
-                                        '${flag(count.countriesList, prov.newVaccList[id]["country"])}') ??
+                                        '${flag(count.countriesList, prov.topVaccList[id].country)}') ??
                                     Colors.grey,
                               ),
                             ),
@@ -53,7 +53,7 @@ class HighListViewVaccines extends StatelessWidget {
                             ),
                             Expanded(
                               child: Text(
-                                '${prov.newVaccList[id]["country"]}',
+                                '${prov.topVaccList[id].country}',
                                 maxLines: 1,
                                 softWrap: false,
                                 overflow: TextOverflow.fade,
@@ -65,13 +65,13 @@ class HighListViewVaccines extends StatelessWidget {
                       Padding(
                         padding:
                             EdgeInsets.only(right: ScreenSize.safeWidth * 1),
-                        child: Text('${prov.newVaccList[id]["value"]}'),
+                        child: Text('${prov.topVaccList[id].timeline.values.elementAt(2)}'),
                       ),
                     ],
                   ),
                 );
               },
-              itemCount: prov.newVaccList.length),
+              itemCount: prov.topVaccList.length),
         ),
       ],
     );

@@ -59,12 +59,12 @@ class GlobalResponseHelper extends ChangeNotifier {
     hTests.sort((a, b) => b.tests.compareTo(a.tests));
     this.hTests = hTests.sublist(0, 5);
 
-    topVaccList = obj[2];
+    topVaccList = List.from(obj[2]);
 
-    topVaccList.forEach((element) {
-      newVaccList.add(
-          {"country": element.country, "value": element.timeline.values.last});
-    });
+    topVaccList.sort((a, b) => b.timeline.values
+        .elementAt(2)
+        .compareTo(a.timeline.values.elementAt(2)));
+    topVaccList = topVaccList.sublist(0, 5);
 
     dailyVaccList = List.from(obj[2]);
     dailyVaccList.sort((k1, k2) => (k2.timeline.values.elementAt(1) -
@@ -77,26 +77,18 @@ class GlobalResponseHelper extends ChangeNotifier {
           element.timeline.values.elementAt(1) - element.timeline.values.first;
     });
 
-    newVaccList.sort((k1, k2) => k2["value"].compareTo(k1["value"]));
-    newVaccList = newVaccList.sublist(0, 5);
-
     bufferStatus = false;
 
     obj = null;
 
     notifyListeners();
   }
-  // eraseData(context) async {
-  //   topRec = topCas = topAct = topDed = null;
-  //   hDeaths = hRecover = hCases = hTests = null; 
-
-  // }
 }
 
 class CountriesResponseHelper extends ChangeNotifier {
   VaccineDataResponse vaccData = VaccineDataResponse();
   List<dynamic> recObj = [];
-  List<CountriesResponse> countriesList = []; //removed deprecated instantiation 
+  List<CountriesResponse> countriesList = []; //removed deprecated instantiation
 
   TestingData testObj = TestingData();
   bool bufferStatus = true;

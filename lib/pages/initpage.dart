@@ -51,22 +51,6 @@ class _InitPageState extends State<InitPage> {
   void initState() {
     print("Init State initialized\n");
     _initWidget = true;
-
-    setState(() {
-      _buffer = true;
-    });
-
-    Future.delayed(Duration.zero, () {
-      provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
-      provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
-      provGlo.getDataGlobal(context);
-    }).then((_) {
-      provCount.getDataCountries(context);
-    }).whenComplete(() {
-      setState(() {
-        _buffer = false;
-      });
-    });
     super.initState();
   }
 
@@ -74,6 +58,24 @@ class _InitPageState extends State<InitPage> {
   void didChangeDependencies() {
     if (_initWidget) {
       ScreenSize().init(context);
+
+      setState(() {
+        _buffer = true;
+      });
+
+      provGlo = Provider.of<GlobalResponseHelper>(context, listen: false);
+      provCount = Provider.of<CountriesResponseHelper>(context, listen: false);
+
+      Future.delayed(Duration.zero, () {
+        provGlo.getDataGlobal(context);
+      }).then((_) {
+        provCount.getDataCountries(context);
+      }).whenComplete(() {
+        setState(() {
+          _buffer = false;
+        });
+      });
+
       _initWidget = !_initWidget;
     }
     super.didChangeDependencies();

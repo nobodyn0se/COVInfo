@@ -6,7 +6,7 @@ import 'package:ncov_visual/provider/coreClass.dart';
 Future<List<dynamic>> fetchDataGlobal(context) async {
   GlobalResponse resGlobal; //placeholder for initial fetch
   List<CountriesResponse> cmap = [];
-  List<TopVaccineList> vcList; 
+  List<TopVaccineList> vcList;
 
   const _url1 = 'https://disease.sh/v3/covid-19/all';
   const _url2 = 'https://disease.sh/v3/covid-19/countries?sort=todayCases';
@@ -24,6 +24,7 @@ Future<List<dynamic>> fetchDataGlobal(context) async {
       print("API Call made");
       final dec = json.decode(resp[0].body);
       final topCasesList = json.decode(resp[1].body);
+
       vcList = listFromJson(resp[2].body);
 
       resGlobal = GlobalResponse.fromJson(dec);
