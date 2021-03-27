@@ -68,13 +68,10 @@ class _InitPageState extends State<InitPage> {
 
       Future.delayed(Duration.zero, () {
         provGlo.getDataGlobal(context);
-      }).then((_) {
         provCount.getDataCountries(context);
-      }).whenComplete(() {
-        setState(() {
-          _buffer = false;
-        });
-      });
+      }).whenComplete(() => setState(() {
+            _buffer = false;
+          }));
 
       _initWidget = !_initWidget;
     }

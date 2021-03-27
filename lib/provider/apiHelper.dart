@@ -17,7 +17,6 @@ class GlobalResponseHelper extends ChangeNotifier {
   List<CountriesResponse> hTests = [];
 
   List<TopVaccineList> topVaccList = [];
-  List<Map<String, dynamic>> newVaccList = [];
   List<TopVaccineList> dailyVaccList = [];
 
   bool bufferStatus = true;
@@ -26,38 +25,38 @@ class GlobalResponseHelper extends ChangeNotifier {
     bufferStatus = true;
     obj = await fetchDataGlobal(context);
 
-    this.globalData = obj[0];
+    globalData = obj[0];
 
     topRec = List.from(obj[1]); //sort max recoveries
     topRec.sort((a, b) => b.todayRecovered.compareTo(a.todayRecovered));
-    this.topRec = topRec.sublist(0, 5);
+    topRec = topRec.sublist(0, 5);
 
     topCas = List.from(obj[1]);
-    this.topCas = topCas.sublist(0, 5); //already sorted by top 24h cases
+    topCas = topCas.sublist(0, 5); //already sorted by top 24h cases
 
     topDed = List.from(obj[1]); //sort max deaths
     topDed.sort((a, b) => b.todayDeaths.compareTo(a.todayDeaths));
-    this.topDed = topDed.sublist(0, 5);
+    topDed = topDed.sublist(0, 5);
 
     topAct = List.from(obj[1]);
     topAct.sort((a, b) => b.active.compareTo(a.active));
-    this.topAct = topAct.sublist(0, 5);
+    topAct = topAct.sublist(0, 5);
 
     hDeaths = List.from(obj[1]);
     hDeaths.sort((a, b) => b.deaths.compareTo(a.deaths));
-    this.hDeaths = hDeaths.sublist(0, 5);
+    hDeaths = hDeaths.sublist(0, 5);
 
     hCases = List.from(obj[1]);
     hCases.sort((a, b) => b.cases.compareTo(a.cases));
-    this.hCases = hCases.sublist(0, 5);
+    hCases = hCases.sublist(0, 5);
 
     hRecover = List.from(obj[1]);
     hRecover.sort((a, b) => b.recovered.compareTo(a.recovered));
-    this.hRecover = hRecover.sublist(0, 5);
+    hRecover = hRecover.sublist(0, 5);
 
     hTests = List.from(obj[1]);
     hTests.sort((a, b) => b.tests.compareTo(a.tests));
-    this.hTests = hTests.sublist(0, 5);
+    hTests = hTests.sublist(0, 5);
 
     topVaccList = List.from(obj[2]);
 
@@ -77,10 +76,9 @@ class GlobalResponseHelper extends ChangeNotifier {
           element.timeline.values.elementAt(1) - element.timeline.values.first;
     });
 
+    if (dailyVaccList[0].timeline["dailyPace"] == 0) dailyVaccList.clear();
+
     bufferStatus = false;
-
-    obj = null;
-
     notifyListeners();
   }
 }
@@ -99,9 +97,8 @@ class CountriesResponseHelper extends ChangeNotifier {
     countriesList = List.from(recObj[0]);
     vaccData = recObj[1]; //gets map from the list
     testObj = recObj[2];
-    bufferStatus = false;
 
-    recObj = null;
+    bufferStatus = false;
     notifyListeners();
   }
 }

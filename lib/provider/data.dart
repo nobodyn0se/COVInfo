@@ -64,6 +64,7 @@ Future<List<dynamic>> fetchDataCountries(context) async {
       // print(json.decode(resp[2].body).runtimeType); Map<String, dynamic>
       print("2nd API Call made");
       vaccineVar = VaccineDataResponse.fromJson(idec);
+      
       for (var id in cdec) {
         crlist.add(CountriesResponse.fromJson(id));
       }

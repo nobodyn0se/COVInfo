@@ -12,19 +12,19 @@ class GlobalPieChart extends StatelessWidget {
       PieChartSectionData(
         color: Colors.amber,
         value: chartObjects[0].toDouble(),
-        radius: ScreenSize.safeHeight*2.5,
+        radius: ScreenSize.safeWidth*4,
         title: '',
       ),
       PieChartSectionData(
         color: Colors.red,
         value: chartObjects[1].toDouble(),
-        radius: ScreenSize.safeHeight*2.5,
+        radius: ScreenSize.safeWidth*4,
         title: '',
       ),
       PieChartSectionData(
         color: Colors.green,
         value: chartObjects[2].toDouble(),
-        radius: ScreenSize.safeHeight*2.5,
+        radius: ScreenSize.safeWidth*4,
         title: '',
       ),
     ];
@@ -63,7 +63,7 @@ class GlobalPieChart extends StatelessWidget {
                           'Total\n${(chartObjects[3] * 0.000001).toStringAsFixed(2)}M',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: ScreenSize.safeHeight * 1.9,
+                            fontSize: ScreenSize.safeHeight * 2,
                           ),
                         ),
                       ],

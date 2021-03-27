@@ -88,17 +88,26 @@ class MainPage extends StatelessWidget {
                     HighListViewTests(prov: prov),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    HighListViewVaccines(prov: prov, count: count),
-                    HighListViewDosagesRates(prov: prov, count: count)
-                  ],
-                ),
-                Container(
-                  height: ScreenSize.safeHeight * 8,
-                ),
+                prov.dailyVaccList.isEmpty
+                    ? HighListViewVaccines(prov: prov, count: count)
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          HighListViewVaccines(prov: prov, count: count),
+                          HighListViewDosagesRates(prov: prov, count: count)
+                        ],
+                      ),
+                prov.dailyVaccList.isEmpty
+                    ? Container(
+                      height: ScreenSize.safeHeight*5,
+                        child: Text(
+                        'Dosage data unavailable!',
+                        textAlign: TextAlign.center,
+                      ))
+                    : Container(
+                        height: ScreenSize.safeHeight * 8,
+                      ),
               ],
             ),
           );
