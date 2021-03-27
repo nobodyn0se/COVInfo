@@ -6,7 +6,7 @@ import '../screen_size.dart';
 
 class TopListViewDeaths extends StatelessWidget {
   const TopListViewDeaths({
-    @required this.prov,
+    required this.prov,
   });
 
   final GlobalResponseHelper prov;

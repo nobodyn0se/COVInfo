@@ -41,7 +41,7 @@ class IndiaPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: ScreenSize.safeWidth * 50),
                   padding: EdgeInsets.only(right: ScreenSize.safeWidth * 2),
                   child: Text(
-                    'Updated at ${glob.globalData.lastHour}:${glob.globalData.lastMinute}', //do not use String interpolation here
+                    'Updated at ${glob.globalData!.lastHour}:${glob.globalData!.lastMinute}', //do not use String interpolation here
                     textAlign: TextAlign.end,
                   ),
                 ),
@@ -55,18 +55,18 @@ class IndiaPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                            'Data upto: ${prov.vaccData.dates[prov.vaccData.dates.length - 1]}\n'),
+                            'Data upto: ${prov.vaccData!.dates![prov.vaccData!.dates!.length - 1]}\n'),
                         Text(
-                            'Total Vaccinations: ${prov.vaccData.doses[prov.vaccData.doses.length - 1]}'),
+                            'Total Vaccinations: ${prov.vaccData!.doses![prov.vaccData!.doses!.length - 1]}'),
                         Text(
-                            'Innoculations in 24h: ${dailyDoses(prov.vaccData.perDay[prov.vaccData.perDay.length - 2], prov.vaccData.perDay[prov.vaccData.perDay.length - 1])}\n'),
+                            'Innoculations in 24h: ${dailyDoses(prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 2], prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 1])}\n'),
                         Text(
-                            'Samples tested: ${prov.testObj.rows[prov.testObj.rows.length - 1].value.samples}'),
+                            'Samples tested: ${prov.testObj!.rows![prov.testObj!.rows!.length - 1].value!.samples}'),
                         Text('Tested in 24h: '
-                            '${dailyDoses(prov.testObj.dailytests[prov.testObj.dailytests.length - 2], prov.testObj.dailytests[prov.testObj.dailytests.length - 1])}\n'),
-                        Text('ETA at current rate: ${prov.vaccData.eta} years'),
+                            '${dailyDoses(prov.testObj!.dailytests![prov.testObj!.dailytests!.length - 2], prov.testObj!.dailytests![prov.testObj!.dailytests!.length - 1])}\n'),
+                        Text('ETA at current rate: ${prov.vaccData!.eta} years'),
                         Text(
-                            'Reaching 20% target by ${months[prov.vaccData.eta20pct.month - 1]} ${prov.vaccData.eta20pct.day}'),
+                            'Reaching 20% target by ${months[prov.vaccData!.eta20pct!.month - 1]} ${prov.vaccData!.eta20pct!.day}'),
                       ],
                     ),
                   ),
@@ -110,11 +110,11 @@ class IndiaPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${prov.vaccData.dates[id]}',
+                                      '${prov.vaccData!.dates![id]}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(prov.vaccData.perDay[id]),
+                                      notZero(prov.vaccData!.perDay![id]),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -122,7 +122,7 @@ class IndiaPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: prov.vaccData.perDay.length,
+                          itemCount: prov.vaccData!.perDay!.length,
                         ),
                       ),
                       SizedBox(
@@ -141,11 +141,11 @@ class IndiaPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${prov.vaccData.dates[id]}',
+                                      '${prov.vaccData!.dates![id]}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(prov.testObj.dailytests[id]),
+                                      notZero(prov.testObj!.dailytests![id]),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -153,7 +153,7 @@ class IndiaPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: prov.testObj.dailytests.length,
+                          itemCount: prov.testObj!.dailytests!.length,
                         ),
                       ),
                     ],

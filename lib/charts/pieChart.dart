@@ -3,7 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:ncov_visual/screen_size.dart';
 
 class GlobalPieChart extends StatelessWidget {
-  final List<int> chartObjects; 
+  final List<int?>? chartObjects; 
 
   GlobalPieChart({this.chartObjects});
 
@@ -11,19 +11,19 @@ class GlobalPieChart extends StatelessWidget {
     return [
       PieChartSectionData(
         color: Colors.amber,
-        value: chartObjects[0].toDouble(),
+        value: chartObjects![0]!.toDouble(),
         radius: ScreenSize.safeWidth*4,
         title: '',
       ),
       PieChartSectionData(
         color: Colors.red,
-        value: chartObjects[1].toDouble(),
+        value: chartObjects![1]!.toDouble(),
         radius: ScreenSize.safeWidth*4,
         title: '',
       ),
       PieChartSectionData(
         color: Colors.green,
-        value: chartObjects[2].toDouble(),
+        value: chartObjects![2]!.toDouble(),
         radius: ScreenSize.safeWidth*4,
         title: '',
       ),
@@ -60,7 +60,7 @@ class GlobalPieChart extends StatelessWidget {
                               sections: showingSections()),
                         ),
                         Text(
-                          'Total\n${(chartObjects[3] * 0.000001).toStringAsFixed(2)}M',
+                          'Total\n${(chartObjects![3]! * 0.000001).toStringAsFixed(2)}M',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: ScreenSize.safeHeight * 2,
@@ -92,7 +92,7 @@ class GlobalPieChart extends StatelessWidget {
                           width: ScreenSize.safeWidth * 1,
                         ),
                         Text(
-                            'Active: ${(chartObjects[0] * 0.000001).toStringAsFixed(2)}M'),
+                            'Active: ${(chartObjects![0]! * 0.000001).toStringAsFixed(2)}M'),
                       ],
                     ),
                     SizedBox(
@@ -115,7 +115,7 @@ class GlobalPieChart extends StatelessWidget {
                           width: ScreenSize.safeWidth * 1,
                         ),
                         Text(
-                            'Deaths: ${(chartObjects[1] * 0.000001).toStringAsFixed(2)}M'),
+                            'Deaths: ${(chartObjects![1]! * 0.000001).toStringAsFixed(2)}M'),
                       ],
                     ),
                     SizedBox(
@@ -138,7 +138,7 @@ class GlobalPieChart extends StatelessWidget {
                           width: ScreenSize.safeWidth * 1,
                         ),
                         Text(
-                            'Recovered: ${(chartObjects[2] * 0.000001).toStringAsFixed(2)}M'),
+                            'Recovered: ${(chartObjects![2]! * 0.000001).toStringAsFixed(2)}M'),
                       ],
                     ),
                   ],
@@ -152,8 +152,8 @@ class GlobalPieChart extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(bottom: ScreenSize.safeWidth*1),
-              child: Text('Case Fatality Rate: ${(chartObjects[1]/chartObjects[3] * 100).toStringAsFixed(2)}%\n'
-              'Recovery Rate: ${(chartObjects[2]/chartObjects[3] * 100).toStringAsFixed(2)}%'),
+              child: Text('Case Fatality Rate: ${(chartObjects![1]!/chartObjects![3]! * 100).toStringAsFixed(2)}%\n'
+              'Recovery Rate: ${(chartObjects![2]!/chartObjects![3]! * 100).toStringAsFixed(2)}%'),
             ),
           ],
         ),

@@ -1,14 +1,14 @@
 class GlobalResponse {
-  final int cases;
-  final int deaths;
-  final int recovered;
-  final int active;
-  final int affectedCountries;
-  final int todayGCases;
-  final int todayGDeaths;
-  final int todayGRecovered;
-  final String lastHour;
-  final String lastMinute;
+  final int? cases;
+  final int? deaths;
+  final int? recovered;
+  final int? active;
+  final int? affectedCountries;
+  final int? todayGCases;
+  final int? todayGDeaths;
+  final int? todayGRecovered;
+  final String? lastHour;
+  final String? lastMinute;
 
   GlobalResponse(
       {this.cases,
@@ -61,21 +61,21 @@ class GlobalResponse {
 }
 
 class CountriesResponse {
-  final String country;
-  final String flagURL; //nested json
-  final int cases;
-  final int todayCases;
-  final int deaths;
-  final int todayDeaths;
-  final int recovered;
-  final int todayRecovered;
-  final int active;
-  final int critical;
-  final int tests;
-  final int cpom;
-  final int dpom;
-  final int rpom;
-  final int tpom;
+  final String? country;
+  final String? flagURL; //nested json
+  final int? cases;
+  final int? todayCases;
+  final int? deaths;
+  final int? todayDeaths;
+  final int? recovered;
+  final int? todayRecovered;
+  final int? active;
+  final int? critical;
+  final int? tests;
+  final int? cpom;
+  final int? dpom;
+  final int? rpom;
+  final int? tpom;
 
   CountriesResponse(
       {this.country,
@@ -114,11 +114,11 @@ class CountriesResponse {
 }
 
 class VaccineDataResponse {
-  final List<String> dates;
-  final List<int> doses;
-  final List<int> perDay;
-  final String eta;
-  final DateTime eta20pct;
+  final List<String>? dates;
+  final List<int>? doses;
+  final List<int>? perDay;
+  final String? eta;
+  final DateTime? eta20pct;
 
   VaccineDataResponse(
       {this.dates, this.doses, this.perDay, this.eta, this.eta20pct});
@@ -161,9 +161,9 @@ class VaccineDataResponse {
 }
 
 class TestingData {
-  final int totalRows;
-  final List<TestRows> rows;
-  final List<int> dailytests;
+  final int? totalRows;
+  final List<TestRows>? rows;
+  final List<int>? dailytests;
 
   TestingData({this.totalRows, this.rows, this.dailytests});
 
@@ -174,7 +174,7 @@ class TestingData {
 
     List<int> tests = [];
     for (int i = 0; i < passList.length - 1; ++i) {
-      tests.add(passList[i + 1].value.samples - passList[i].value.samples);
+      tests.add(passList[i + 1].value!.samples! - passList[i].value!.samples!);
     }
     //return 29 days of data
     return TestingData(
@@ -186,7 +186,7 @@ class TestingData {
 }
 
 class TestRows {
-  final Val value;
+  final Val? value;
 
   TestRows({this.value});
 
@@ -196,7 +196,7 @@ class TestRows {
 }
 
 class Val {
-  final int samples;
+  final int? samples;
 
   Val({this.samples});
 
@@ -207,8 +207,8 @@ class Val {
 
 //Top 5 Vaccine List
 class TopVaccineList {
-  final String country;
-  final Map<String, int> timeline;
+  final String? country;
+  final Map<String, int>? timeline;
 
   TopVaccineList({this.country, this.timeline});
 

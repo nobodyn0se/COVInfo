@@ -5,7 +5,7 @@ import '../screen_size.dart';
 
 class HighListViewCases extends StatelessWidget {
   const HighListViewCases({
-    @required this.prov,
+    required this.prov,
   });
 
   final GlobalResponseHelper prov;

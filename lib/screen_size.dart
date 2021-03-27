@@ -3,16 +3,16 @@ import 'package:flutter/widgets.dart';
 class ScreenSize {
   //to get MediaQuery dimensions for scalable elements
 
-  static MediaQueryData _mediaQueryData;
-  static double screenHeight;
-  static double screenWidth;
-  static double blockWidth;
-  static double blockHeight;
+  static late MediaQueryData _mediaQueryData;
+  static late double screenHeight;
+  static late double screenWidth;
+  static double? blockWidth;
+  static late double blockHeight;
 
-  static double _safeAreaLateral; //horizontal
-  static double _safeAreaVertical;
-  static double safeHeight;
-  static double safeWidth;
+  static late double _safeAreaLateral; //horizontal
+  static late double _safeAreaVertical;
+  static late double safeHeight;
+  static late double safeWidth;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);

@@ -5,8 +5,8 @@ import '../screen_size.dart';
 
 class HighListViewVaccines extends StatelessWidget {
   const HighListViewVaccines({
-    @required this.prov,
-    @required this.count,
+    required this.prov,
+    required this.count,
   });
 
   final GlobalResponseHelper prov;
@@ -45,7 +45,7 @@ class HighListViewVaccines extends StatelessWidget {
                                 radius: ScreenSize.safeHeight * 1.8,
                                 backgroundImage: NetworkImage(
                                         '${flag(count.countriesList, prov.topVaccList[id].country)}') ??
-                                    Colors.grey,
+                                    Colors.grey as ImageProvider<Object>?,
                               ),
                             ),
                             SizedBox(
@@ -66,7 +66,7 @@ class HighListViewVaccines extends StatelessWidget {
                         padding:
                             EdgeInsets.only(right: ScreenSize.safeWidth * 1),
                         child: Text(
-                            '${prov.topVaccList[id].timeline.values.elementAt(2)}'),
+                            '${prov.topVaccList[id].timeline!.values.elementAt(2)}'),
                       ),
                     ],
                   ),
@@ -79,5 +79,5 @@ class HighListViewVaccines extends StatelessWidget {
   }
 }
 
-String flag(List<CountriesResponse> cList, String country) =>
+String? flag(List<CountriesResponse> cList, String? country) =>
     cList.firstWhere((element) => element.country == country).flagURL;

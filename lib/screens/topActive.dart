@@ -5,7 +5,7 @@ import '../screen_size.dart';
 
 class TopListViewActive extends StatelessWidget {
   const TopListViewActive({
-    @required this.prov,
+    required this.prov,
   });
 
   final GlobalResponseHelper prov;

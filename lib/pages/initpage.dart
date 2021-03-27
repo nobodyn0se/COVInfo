@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:ncov_visual/provider/apiHelper.dart';
@@ -15,8 +17,8 @@ class InitPage extends StatefulWidget {
 class _InitPageState extends State<InitPage> {
   bool _initWidget = false;
   bool _buffer = true;
-  GlobalResponseHelper provGlo;
-  CountriesResponseHelper provCount;
+  late GlobalResponseHelper provGlo;
+  late CountriesResponseHelper provCount;
 
   final List<Map<String, dynamic>> _tabs = [
     {
@@ -93,7 +95,7 @@ class _InitPageState extends State<InitPage> {
           : IndexedStack(
               index: initIndex,
               children: [
-                ..._tabs.map((e) => e['page']).toList()
+                ..._tabs.map((e) => e['page']).toList() as Iterable<Widget>
               ], //retain state and create list of widgets
             ),
       floatingActionButton: FloatingActionButton(
@@ -104,11 +106,9 @@ class _InitPageState extends State<InitPage> {
           Future.delayed(Duration.zero, () {
             Provider.of<GlobalResponseHelper>(context, listen: false)
                 .getDataGlobal(context);
-          })
-              .then((_) =>
-                  Provider.of<CountriesResponseHelper>(context, listen: false)
-                      .getDataCountries(context))
-              .whenComplete(() {
+            Provider.of<CountriesResponseHelper>(context, listen: false)
+                .getDataCountries(context);
+          }).whenComplete(() {
             setState(() {
               _buffer = false;
             });
@@ -122,7 +122,7 @@ class _InitPageState extends State<InitPage> {
       bottomNavigationBar: CurvedNavigationBar(
         color: _tabs[initIndex]['bgcolor'],
         backgroundColor:
-            Colors.grey[200], //widget coloring bug when transparent
+            Colors.grey[200]!, //widget coloring bug when transparent
         buttonBackgroundColor: _tabs[initIndex]['bgcolor'],
         height: ScreenSize.blockHeight * 6.2, //6.2%
         index: initIndex, //sets the initial index for BottomNavigationBar

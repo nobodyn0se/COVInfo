@@ -54,7 +54,7 @@ class CountriesPage extends StatelessWidget {
                               backgroundColor: Colors.black,
                               child: CircleAvatar(
                                 radius: ScreenSize.safeHeight * 3.6,
-                                backgroundImage: NetworkImage(uid.flagURL),
+                                backgroundImage: NetworkImage(uid.flagURL!),
                               ), //inner
                             ),
                             SizedBox(
@@ -65,7 +65,7 @@ class CountriesPage extends StatelessWidget {
                                 '${uid.country}\n'
                                         'A: ${uid.active} ' +
                                     netActive(
-                                        uid.todayCases, uid.todayRecovered),
+                                        uid.todayCases!, uid.todayRecovered!),
                                 overflow: TextOverflow.fade,
                               ),
                             ),
@@ -107,7 +107,7 @@ class CountriesPage extends StatelessWidget {
 }
 
 class RowWithNumbers extends StatelessWidget {
-  const RowWithNumbers({@required this.ic, @required this.disp});
+  const RowWithNumbers({required this.ic, required this.disp});
   final IconData ic;
   final int disp;
 

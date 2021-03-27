@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:ncov_visual/provider/coreClass.dart';
 
 Future<List<dynamic>> fetchDataGlobal(context) async {
-  GlobalResponse resGlobal; //placeholder for initial fetch
+  GlobalResponse? resGlobal; //placeholder for initial fetch
   List<CountriesResponse> cmap = [];
-  List<TopVaccineList> vcList;
+  List<TopVaccineList>? vcList;
 
   final _url1 = Uri.parse('https://disease.sh/v3/covid-19/all');
   final _url2 = Uri.parse('https://disease.sh/v3/covid-19/countries?sort=todayCases');
@@ -35,15 +35,15 @@ Future<List<dynamic>> fetchDataGlobal(context) async {
       dec.clear();
     }
   } catch (er) {
-    log(er);
+    log(er.toString());
   }
   return [resGlobal, cmap, vcList];
 }
 
 Future<List<dynamic>> fetchDataCountries(context) async {
   List<CountriesResponse> crlist = [];
-  VaccineDataResponse vaccineVar;
-  TestingData testVar;
+  VaccineDataResponse? vaccineVar;
+  TestingData? testVar;
 
   final _url2 = Uri.parse('https://disease.sh/v3/covid-19/countries?sort=cases');
   final _url4 =
@@ -74,7 +74,7 @@ Future<List<dynamic>> fetchDataCountries(context) async {
     } //if block
 
   } catch (err) {
-    log(err);
+    log(err.toString());
   }
   return [crlist, vaccineVar, testVar];
 }

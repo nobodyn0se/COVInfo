@@ -5,8 +5,8 @@ import 'highestVaccines.dart';
 
 class HighListViewDosagesRates extends StatelessWidget {
   const HighListViewDosagesRates({
-    @required this.prov,
-    @required this.count,
+    required this.prov,
+    required this.count,
   });
 
   final GlobalResponseHelper prov;
@@ -45,7 +45,7 @@ class HighListViewDosagesRates extends StatelessWidget {
                                 radius: ScreenSize.safeHeight * 1.8,
                                 backgroundImage: NetworkImage(
                                         '${flag(count.countriesList, prov.dailyVaccList[id].country)}') ??
-                                    Colors.grey,
+                                    Colors.grey as ImageProvider<Object>?,
                               ),
                             ),
                             SizedBox(
@@ -65,7 +65,7 @@ class HighListViewDosagesRates extends StatelessWidget {
                       Padding(
                         padding:
                             EdgeInsets.only(right: ScreenSize.safeWidth * 1),
-                        child: Text(retPace(prov.dailyVaccList[id].timeline["dailyPace"])),
+                        child: Text(retPace(prov.dailyVaccList[id].timeline!["dailyPace"]!)),
                       ),
                     ],
                   ),

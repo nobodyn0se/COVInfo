@@ -47,10 +47,10 @@ class MainPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        expandedTile('Cases', prov.globalData.todayGCases),
-                        expandedTile('Deaths', prov.globalData.todayGDeaths),
+                        expandedTile('Cases', prov.globalData!.todayGCases),
+                        expandedTile('Deaths', prov.globalData!.todayGDeaths),
                         expandedTile(
-                            'Recoveries', prov.globalData.todayGRecovered),
+                            'Recoveries', prov.globalData!.todayGRecovered),
                       ],
                     ),
                   ),
@@ -116,8 +116,8 @@ class MainPage extends StatelessWidget {
 
 class DisplayGlobalData extends StatelessWidget {
   const DisplayGlobalData({
-    Key key,
-    @required this.prov,
+    Key? key,
+    required this.prov,
   }) : super(key: key);
 
   final GlobalResponseHelper prov;
@@ -134,18 +134,18 @@ class DisplayGlobalData extends StatelessWidget {
           //padding: EdgeInsets.only(right: ScreenSize.safeWidth * 1),
           child: Text(
             'Updated at ' +
-                prov.globalData.lastHour +
+                prov.globalData!.lastHour! +
                 ':' +
-                prov.globalData.lastMinute,
+                prov.globalData!.lastMinute!,
             textAlign: TextAlign.end,
           ),
         ),
         GlobalPieChart(
           chartObjects: [
-            prov.globalData.active,
-            prov.globalData.deaths,
-            prov.globalData.recovered,
-            prov.globalData.cases,
+            prov.globalData!.active,
+            prov.globalData!.deaths,
+            prov.globalData!.recovered,
+            prov.globalData!.cases,
           ],
         ),
       ],
@@ -164,7 +164,7 @@ Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
           child: CircleAvatar(
             radius: ScreenSize.safeHeight * 1.8,
             backgroundImage:
-                NetworkImage('${buildList[id].flagURL}') ?? Colors.grey,
+                NetworkImage('${buildList[id].flagURL}') ?? Colors.grey as ImageProvider<Object>?,
           ),
         ),
         SizedBox(
@@ -183,7 +183,7 @@ Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
   );
 }
 
-Expanded expandedTile(String title, int value) {
+Expanded expandedTile(String title, int? value) {
   return Expanded(
     child: Card(
       elevation: ScreenSize.safeWidth * 1,

@@ -12,6 +12,6 @@ class NavModel extends ChangeNotifier {
     notifyListeners(); 
   }
 
-  get currentTab => this._currentTab;
+  int get currentTab => this._currentTab;
   get currentScreen => this._screen[this._currentTab];
 }
