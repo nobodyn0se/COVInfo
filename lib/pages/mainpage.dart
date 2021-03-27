@@ -163,8 +163,7 @@ Expanded buildLeadingRow(int id, List<CountriesResponse> buildList) {
           backgroundColor: Colors.black,
           child: CircleAvatar(
             radius: ScreenSize.safeHeight * 1.8,
-            backgroundImage:
-                NetworkImage('${buildList[id].flagURL}') ?? Colors.grey as ImageProvider<Object>?,
+            backgroundImage: NetworkImage('${buildList[id].flagURL}'),
           ),
         ),
         SizedBox(

@@ -44,8 +44,7 @@ class HighListViewDosagesRates extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: ScreenSize.safeHeight * 1.8,
                                 backgroundImage: NetworkImage(
-                                        '${flag(count.countriesList, prov.dailyVaccList[id].country)}') ??
-                                    Colors.grey as ImageProvider<Object>?,
+                                    '${flag(count.countriesList, prov.dailyVaccList[id].country)}'),
                               ),
                             ),
                             SizedBox(
@@ -65,7 +64,8 @@ class HighListViewDosagesRates extends StatelessWidget {
                       Padding(
                         padding:
                             EdgeInsets.only(right: ScreenSize.safeWidth * 1),
-                        child: Text(retPace(prov.dailyVaccList[id].timeline!["dailyPace"]!)),
+                        child: Text(retPace(
+                            prov.dailyVaccList[id].timeline!["dailyPace"]!)),
                       ),
                     ],
                   ),
@@ -79,6 +79,8 @@ class HighListViewDosagesRates extends StatelessWidget {
 }
 
 String retPace(int number) {
-  if(number > 999999) return "${(number * 0.000001).toStringAsFixed(3)}M/day"; 
-  else return "${(number * .001).toStringAsFixed(1)}k/day"; 
+  if (number > 999999)
+    return "${(number * 0.000001).toStringAsFixed(3)}M/day";
+  else
+    return "${(number * .001).toStringAsFixed(1)}k/day";
 }

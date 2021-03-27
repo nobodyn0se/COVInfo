@@ -44,8 +44,7 @@ class HighListViewVaccines extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: ScreenSize.safeHeight * 1.8,
                                 backgroundImage: NetworkImage(
-                                        '${flag(count.countriesList, prov.topVaccList[id].country)}') ??
-                                    Colors.grey as ImageProvider<Object>?,
+                                        '${flag(count.countriesList, prov.topVaccList[id].country)}'),
                               ),
                             ),
                             SizedBox(
