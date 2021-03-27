@@ -8,10 +8,10 @@ Future<List<dynamic>> fetchDataGlobal(context) async {
   List<CountriesResponse> cmap = [];
   List<TopVaccineList> vcList;
 
-  const _url1 = 'https://disease.sh/v3/covid-19/all';
-  const _url2 = 'https://disease.sh/v3/covid-19/countries?sort=todayCases';
-  const _url3 =
-      'https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=3';
+  final _url1 = Uri.parse('https://disease.sh/v3/covid-19/all');
+  final _url2 = Uri.parse('https://disease.sh/v3/covid-19/countries?sort=todayCases');
+  final _url3 =
+      Uri.parse('https://disease.sh/v3/covid-19/vaccine/coverage/countries?lastdays=3');
   //countries vaccine data
 
   try {
@@ -45,11 +45,11 @@ Future<List<dynamic>> fetchDataCountries(context) async {
   VaccineDataResponse vaccineVar;
   TestingData testVar;
 
-  const _url2 = 'https://disease.sh/v3/covid-19/countries?sort=cases';
-  const _url4 =
-      'https://disease.sh/v3/covid-19/vaccine/coverage/countries/india?lastdays=30';
-  const _url5 =
-      'https://raw.githubusercontent.com/datameet/covid19/master/data/icmr_testing_status.json'; //testing data
+  final _url2 = Uri.parse('https://disease.sh/v3/covid-19/countries?sort=cases');
+  final _url4 =
+      Uri.parse('https://disease.sh/v3/covid-19/vaccine/coverage/countries/india?lastdays=30');
+  final _url5 =
+      Uri.parse('https://raw.githubusercontent.com/datameet/covid19/master/data/icmr_testing_status.json'); //testing data
 
   try {
     final resp =
@@ -64,7 +64,7 @@ Future<List<dynamic>> fetchDataCountries(context) async {
       // print(json.decode(resp[2].body).runtimeType); Map<String, dynamic>
       print("2nd API Call made");
       vaccineVar = VaccineDataResponse.fromJson(idec);
-      
+
       for (var id in cdec) {
         crlist.add(CountriesResponse.fromJson(id));
       }

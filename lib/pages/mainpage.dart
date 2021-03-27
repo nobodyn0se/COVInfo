@@ -21,7 +21,7 @@ class MainPage extends StatelessWidget {
     final prov = Provider.of<GlobalResponseHelper>(context);
     final count = Provider.of<CountriesResponseHelper>(context);
 
-    return prov.bufferStatus
+    return prov.bufferStatus || count.bufferStatus
         ? Center(
             child: CircularProgressIndicator(),
           )

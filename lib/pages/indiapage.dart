@@ -24,7 +24,7 @@ class IndiaPage extends StatelessWidget {
     final prov = Provider.of<CountriesResponseHelper>(context);
     final glob = Provider.of<GlobalResponseHelper>(context);
 
-    return glob.bufferStatus && prov.bufferStatus
+    return glob.bufferStatus || prov.bufferStatus
         ? Center(
             child: CircularProgressIndicator(),
           )
