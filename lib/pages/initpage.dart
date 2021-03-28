@@ -95,7 +95,7 @@ class _InitPageState extends State<InitPage> {
           : IndexedStack(
               index: initIndex,
               children: [
-                ..._tabs.map((e) => e['page']).toList() as Iterable<Widget>
+                ..._tabs.map((e) => e['page']).toList()
               ], //retain state and create list of widgets
             ),
       floatingActionButton: FloatingActionButton(

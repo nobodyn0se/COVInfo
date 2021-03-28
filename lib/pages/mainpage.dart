@@ -100,9 +100,9 @@ class MainPage extends StatelessWidget {
                       ),
                 prov.dailyVaccList.isEmpty
                     ? Container(
-                      height: ScreenSize.safeHeight*5,
+                      height: ScreenSize.safeHeight*4,
                         child: Text(
-                        'Dosage data unavailable!',
+                        'Dosage rates unavailable!',
                         textAlign: TextAlign.center,
                       ))
                     : Container(

@@ -66,18 +66,20 @@ class GlobalResponseHelper extends ChangeNotifier {
     topVaccList = topVaccList.sublist(0, 5);
 
     dailyVaccList = List.from(obj[2]);
-    dailyVaccList.sort((k1, k2) => (k2.timeline!.values.elementAt(1) -
-            k2.timeline!.values.first)
-        .compareTo(k1.timeline!.values.elementAt(1) - k1.timeline!.values.first));
+    dailyVaccList.sort((k1, k2) =>
+        (k2.timeline!.values.elementAt(1) - k2.timeline!.values.first)
+            .compareTo(
+                k1.timeline!.values.elementAt(1) - k1.timeline!.values.first));
     dailyVaccList = dailyVaccList.sublist(0, 5);
 
     dailyVaccList.forEach((element) {
-      element.timeline!["dailyPace"] =
-          element.timeline!.values.elementAt(1) - element.timeline!.values.first;
+      element.timeline!["dailyPace"] = element.timeline!.values.elementAt(1) -
+          element.timeline!.values.first;
     });
 
     if (dailyVaccList[0].timeline!["dailyPace"] == 0) dailyVaccList.clear();
 
+    obj.removeRange(1, 3);
     bufferStatus = false;
     notifyListeners();
   }
@@ -98,6 +100,7 @@ class CountriesResponseHelper extends ChangeNotifier {
     vaccData = recObj[1]; //gets map from the list
     testObj = recObj[2];
 
+    recObj.removeRange(0, 1); 
     bufferStatus = false;
     notifyListeners();
   }
