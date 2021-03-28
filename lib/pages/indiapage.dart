@@ -23,7 +23,8 @@ class IndiaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<CountriesResponseHelper>(context);
-    final glob = Provider.of<GlobalResponseHelper>(context);
+    final glob = Provider.of<GlobalResponseHelper>(context); 
+    late final doses = prov.vaccData!.doseList!; 
 
     return glob.bufferStatus || prov.bufferStatus
         ? Center(
@@ -56,11 +57,14 @@ class IndiaPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                            'Data upto: ${prov.vaccData!.dates![prov.vaccData!.dates!.length - 1]}\n'),
+                            'Data upto: ${months[doses[doses.length - 1].weekdate!.month]} '
+                            '${doses[doses.length - 1].weekdate!.day}, ' 
+                            '${doses[doses.length - 1].weekdate!.year}\n'),
                         Text(
-                            'Total Vaccinations: ${prov.vaccData!.doseList![prov.vaccData!.doseList!.length-1].values}'),
+                            'Total Vaccinations: ${prov.vaccData!.totalDoses}'),
                         Text(
-                            'Innoculations in 24h: ${dailyDoses(prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 2], prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 1])}\n'),
+                            'Innoculations in 24h: '
+                            '${dailyDoses(doses[doses.length - 2].values!, doses[doses.length - 1].values!)}\n'),
                         Text(
                             'Samples tested: ${prov.testObj!.totalSamples!}'),
                         Text('Tested in 24h: '
@@ -111,12 +115,12 @@ class IndiaPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${months[prov.vaccData!.doseList![id].weekdate!.month]} '
-                                      '${prov.vaccData!.doseList![id].weekdate!.day}',
+                                      '${months[doses[id].weekdate!.month]} '
+                                      '${doses[id].weekdate!.day}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(prov.vaccData!.doseList![id].values!),
+                                      notZero(doses[id].values!),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -124,7 +128,7 @@ class IndiaPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: prov.vaccData!.doseList!.length,
+                          itemCount: doses.length,
                         ),
                       ),
                       SizedBox(

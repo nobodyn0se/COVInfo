@@ -102,7 +102,8 @@ class CountriesResponseHelper extends ChangeNotifier {
     testObj = recObj[2];
     
     testingList = timeparse(vaccData!.dates!, testObj!.dailytests!); 
-    
+    vaccData!.dates!.clear(); 
+  
     recObj.removeRange(0, 1);
     bufferStatus = false;
     notifyListeners();

@@ -115,14 +115,13 @@ class CountriesResponse {
 
 class VaccineDataResponse {
   final List<String>? dates;
-  final List<int>? doses;
-  final List<int>? perDay;
+  final int? totalDoses;
   final String? eta;
   final DateTime? eta20pct;
   final List<TimeData>? doseList; 
 
   VaccineDataResponse(
-      {this.dates, this.doses, this.perDay, this.eta, this.eta20pct, this.doseList});
+      {this.dates, this.totalDoses,  this.eta, this.eta20pct, this.doseList});
 
   factory VaccineDataResponse.fromJson(Map<String, dynamic> json) {
     Map<String, int> timeMap =
@@ -158,8 +157,7 @@ class VaccineDataResponse {
     return VaccineDataResponse(
         doseList: dosages,
         dates: cdates,
-        doses: cdoses,
-        perDay: daily,
+        totalDoses: cdoses[cdoses.length-1],
         eta: etaVal,
         eta20pct: eta20);
   }
