@@ -70,7 +70,6 @@ Future<List<dynamic>> fetchDataCountries(context) async {
       }
 
       testVar = TestingData.fromJson(tdec);
-      //testVar.rows.sublist(testVar.rows.length - 27, testVar.rows.length);
     } //if block
 
   } catch (err) {

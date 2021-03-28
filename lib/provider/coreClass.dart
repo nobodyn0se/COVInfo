@@ -119,9 +119,10 @@ class VaccineDataResponse {
   final List<int>? perDay;
   final String? eta;
   final DateTime? eta20pct;
+  final List<TimeData>? doseList; 
 
   VaccineDataResponse(
-      {this.dates, this.doses, this.perDay, this.eta, this.eta20pct});
+      {this.dates, this.doses, this.perDay, this.eta, this.eta20pct, this.doseList});
 
   factory VaccineDataResponse.fromJson(Map<String, dynamic> json) {
     Map<String, int> timeMap =
@@ -129,6 +130,7 @@ class VaccineDataResponse {
 
     List<String> cdates = timeMap.keys.toList();
     List<int> cdoses = timeMap.values.toList(); //reduce
+
     List<int> daily = [];
 
     for (int i = 0; i < cdoses.length - 1; ++i) {
@@ -136,7 +138,9 @@ class VaccineDataResponse {
     }
 
     daily = daily.sublist(0, daily.length);
-    cdates = cdates.sublist(1, cdates.length); //keep equal length
+    cdates = cdates.sublist(1, cdates.length); //keep equal length at 29 days
+
+    final List<TimeData>? dosages = timeparse(cdates, daily);
 
     int sum = 0;
     final don = cdoses[cdoses.length - 1] * 0.000001;
@@ -152,6 +156,7 @@ class VaccineDataResponse {
     final eta20 = DateTime.now().add(Duration(days: days20));
     //ETA for 20% population coverage
     return VaccineDataResponse(
+        doseList: dosages,
         dates: cdates,
         doses: cdoses,
         perDay: daily,
@@ -161,11 +166,10 @@ class VaccineDataResponse {
 }
 
 class TestingData {
-  final int? totalRows;
-  final List<TestRows>? rows;
+  final int? totalSamples;
   final List<int>? dailytests;
 
-  TestingData({this.totalRows, this.rows, this.dailytests});
+  TestingData({this.totalSamples, this.dailytests});
 
   factory TestingData.fromJson(Map<String, dynamic> json) {
     List<TestRows> passList =
@@ -177,9 +181,11 @@ class TestingData {
       tests.add(passList[i + 1].value!.samples! - passList[i].value!.samples!);
     }
     //return 29 days of data
+
+    passList.removeRange(0, passList.length-1); 
+
     return TestingData(
-      totalRows: json["total_rows"],
-      rows: passList,
+      totalSamples: passList[0].value!.samples, 
       dailytests: tests,
     );
   }
@@ -200,9 +206,8 @@ class Val {
 
   Val({this.samples});
 
-  factory Val.fromJson(Map<String, dynamic> json) 
-    => Val(samples: json["samples"]);
-  
+  factory Val.fromJson(Map<String, dynamic> json) =>
+      Val(samples: json["samples"]);
 }
 
 //Top 5 Vaccine List
@@ -219,4 +224,24 @@ class TopVaccineList {
           Map.from(json['timeline']).map((k, v) => MapEntry<String, int>(k, v)),
     );
   }
+}
+
+class TimeData {
+  final DateTime? weekdate;
+  final int? values;
+
+  TimeData({this.values, this.weekdate});
+}
+
+List<TimeData> timeparse(List<String> givenList, List<int> vals) {
+  List<TimeData> toBeReturned = [];
+  for (int i = 0; i < givenList.length; ++i) {
+    int m = int.parse(givenList[i].substring(0, givenList[i].indexOf('/')));
+    int d = int.parse(givenList[i].substring(
+        givenList[i].indexOf('/') + 1, givenList[i].indexOf('/', 3)));
+    int y = 2000 +
+        int.parse(givenList[i].substring(givenList[i].indexOf('/', 3) + 1));
+    toBeReturned.add(TimeData(weekdate: DateTime(y, m, d), values: vals[i]));
+  }
+  return toBeReturned;
 }

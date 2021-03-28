@@ -89,6 +89,7 @@ class CountriesResponseHelper extends ChangeNotifier {
   VaccineDataResponse? vaccData = VaccineDataResponse();
   List<dynamic> recObj = [];
   List<CountriesResponse> countriesList = []; //removed deprecated instantiation
+  late List<TimeData> testingList; 
 
   TestingData? testObj = TestingData();
   bool bufferStatus = true;
@@ -99,8 +100,10 @@ class CountriesResponseHelper extends ChangeNotifier {
     countriesList = List.from(recObj[0]);
     vaccData = recObj[1]; //gets map from the list
     testObj = recObj[2];
-
-    recObj.removeRange(0, 1); 
+    
+    testingList = timeparse(vaccData!.dates!, testObj!.dailytests!); 
+    
+    recObj.removeRange(0, 1);
     bufferStatus = false;
     notifyListeners();
   }

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 class IndiaPage extends StatelessWidget {
   final List months = [
+    'Null',
     'Jan',
     'Feb',
     'Mar',
@@ -57,16 +58,16 @@ class IndiaPage extends StatelessWidget {
                         Text(
                             'Data upto: ${prov.vaccData!.dates![prov.vaccData!.dates!.length - 1]}\n'),
                         Text(
-                            'Total Vaccinations: ${prov.vaccData!.doses![prov.vaccData!.doses!.length - 1]}'),
+                            'Total Vaccinations: ${prov.vaccData!.doseList![prov.vaccData!.doseList!.length-1].values}'),
                         Text(
                             'Innoculations in 24h: ${dailyDoses(prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 2], prov.vaccData!.perDay![prov.vaccData!.perDay!.length - 1])}\n'),
                         Text(
-                            'Samples tested: ${prov.testObj!.rows![prov.testObj!.rows!.length - 1].value!.samples}'),
+                            'Samples tested: ${prov.testObj!.totalSamples!}'),
                         Text('Tested in 24h: '
-                            '${dailyDoses(prov.testObj!.dailytests![prov.testObj!.dailytests!.length - 2], prov.testObj!.dailytests![prov.testObj!.dailytests!.length - 1])}\n'),
+                            '${dailyDoses(prov.testingList[prov.testingList.length - 2].values!, prov.testingList[prov.testingList.length - 1].values!)}\n'),
                         Text('ETA at current rate: ${prov.vaccData!.eta} years'),
                         Text(
-                            'Reaching 20% target by ${months[prov.vaccData!.eta20pct!.month - 1]} ${prov.vaccData!.eta20pct!.day}'),
+                            'Reaching 20% target by ${months[prov.vaccData!.eta20pct!.month]} ${prov.vaccData!.eta20pct!.day}'),
                       ],
                     ),
                   ),
@@ -110,11 +111,12 @@ class IndiaPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${prov.vaccData!.dates![id]}',
+                                      '${months[prov.vaccData!.doseList![id].weekdate!.month]} '
+                                      '${prov.vaccData!.doseList![id].weekdate!.day}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(prov.vaccData!.perDay![id]),
+                                      notZero(prov.vaccData!.doseList![id].values!),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -122,7 +124,7 @@ class IndiaPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: prov.vaccData!.perDay!.length,
+                          itemCount: prov.vaccData!.doseList!.length,
                         ),
                       ),
                       SizedBox(
@@ -141,11 +143,12 @@ class IndiaPage extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${prov.vaccData!.dates![id]}',
+                                      '${months[prov.testingList[id].weekdate!.month]} '
+                                      '${prov.testingList[id].weekdate!.day}',
                                       textAlign: TextAlign.left,
                                     ),
                                     Text(
-                                      notZero(prov.testObj!.dailytests![id]),
+                                      notZero(prov.testingList[id].values!),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
@@ -153,7 +156,7 @@ class IndiaPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: prov.testObj!.dailytests!.length,
+                          itemCount: prov.testingList.length,
                         ),
                       ),
                     ],
