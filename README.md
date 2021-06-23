@@ -27,15 +27,15 @@ Workflow: Changes in your feature branch (username_mod) will be rebased on top o
 ## Do not make changes to your main branch. Always ensure that you're working on your mod branch using git branch or git branch --show-current ## 
 
 ## TO DO ## 
-1. Create a Bottom Navigation Bar to show different pages using tabs. 
-2. Display a list of countries with clickable detailed list of countrywide stats separately. 
-3. Display Visualization page for India that includes testing data. 
-4. Show a pie chart on the main tab for worldwide statistics. 
-5. Create a search bar for countries on the countries page. 
-6. Make the navigation bar dynamic with different material colors and animations. 
-7. Show top 5 countries in new detections, deaths and recoveries on the main page. 
-8. Create a loading screen until data is fetched. 
-9. Refresh data on all tabs when the refresh button is pressed from any page. 
+[x] Create a Bottom Navigation Bar to show different pages using tabs. 
+[x] Display a list of countries with clickable detailed list of countrywide stats separately. 
+[x] Display Visualization page for India that includes testing data. 
+[x] Show a pie chart on the main tab for worldwide statistics. 
+[ ] Create a search bar for countries on the countries page. 
+[x] Make the navigation bar dynamic with different material colors and animations. 
+[x] Show top 5 countries in new detections, deaths and recoveries on the main page. 
+[x] Create a loading screen until data is fetched. 
+[x] Refresh data on all tabs when the refresh button is pressed from any page. 
 
 ### Changelog ### 
 v1.0.0 : 
