@@ -1,6 +1,12 @@
 # COVID-19 Track n Visualize
 Source Code for COVInfo - RealTime COVID-19 Tracker. 
 
+![image](https://user-images.githubusercontent.com/48710616/123158075-f4a49680-d488-11eb-93be-3f6150a4e999.png) ![image](https://user-images.githubusercontent.com/48710616/123157900-c2933480-d488-11eb-8027-e398f51b1e42.png)
+
+![image](https://user-images.githubusercontent.com/48710616/123158147-0a19c080-d489-11eb-8451-bada52c6f2c6.png) ![image](https://user-images.githubusercontent.com/48710616/123158180-156cec00-d489-11eb-8505-02804c0ecda4.png)
+
+![image](https://user-images.githubusercontent.com/48710616/123159195-59142580-d48a-11eb-94f5-0035901accfc.png) ![image](https://user-images.githubusercontent.com/48710616/123159214-5f0a0680-d48a-11eb-97ba-ee33cdecda4f.png)
+
 ### All final changes go into the main branch. ### 
 Workflow: Changes in feature branch to be rebased on top of the main branch. 
 - All PRs will be merged with the main branch. 
